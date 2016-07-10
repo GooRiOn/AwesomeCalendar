@@ -1,0 +1,11 @@
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\AwesomeCalendar.DataAccess.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\AwesomeCalendar.DataAccess.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\Autofac.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\AwesomeCalendar.Contracts.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\AwesomeCalendar.Infrastructure.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\AwesomeCalendar.Contracts.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\AwesomeCalendar.Infrastructure.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\bin\Debug\Autofac.xml
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\obj\Debug\AwesomeCalendar.DataAccess.csprojResolveAssemblyReference.cache
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\obj\Debug\AwesomeCalendar.DataAccess.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.DataAccess\obj\Debug\AwesomeCalendar.DataAccess.pdb

@@ -4,12 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.Ajax.Utilities;
 
 namespace AwesomeCalendar.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
+        public ValuesController()
+        {
+            
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {

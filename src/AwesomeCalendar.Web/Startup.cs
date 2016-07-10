@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AwesomeCalendar.Web.App_Start;
 using Microsoft.Owin;
 using Owin;
 
@@ -13,6 +14,7 @@ namespace AwesomeCalendar.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            AutofacConfig.Register(app);
         }
     }
 }
