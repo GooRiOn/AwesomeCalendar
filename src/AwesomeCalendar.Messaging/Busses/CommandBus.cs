@@ -29,9 +29,9 @@ namespace AwesomeCalendar.Messaging.Busses
         void ProccessBus(ICommand command)
         {
             var commandType = command.GetType();
-            var factoryType = CommandHandlerFactory.GetType();
+            var executorType = CommandHandlerFactory.GetType();
 
-            factoryType.GetMethod(nameof(ICommandHandlerExecutor.Execute))
+            executorType.GetMethod(nameof(ICommandHandlerExecutor.Execute))
                 .MakeGenericMethod(commandType)
                 .Invoke(CommandHandlerFactory, new[] {command});
         }
