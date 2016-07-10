@@ -1,7 +1,0 @@
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\bin\Debug\AwesomeCalendar.Infrastructure.dll
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\bin\Debug\AwesomeCalendar.Infrastructure.pdb
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\bin\Debug\Autofac.dll
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\bin\Debug\Autofac.xml
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\obj\Debug\AwesomeCalendar.Infrastructure.csprojResolveAssemblyReference.cache
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\obj\Debug\AwesomeCalendar.Infrastructure.dll
-C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Infrastructure\obj\Debug\AwesomeCalendar.Infrastructure.pdb
