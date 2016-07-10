@@ -1,0 +1,9 @@
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\bin\Debug\AwesomeCalendar.Contracts.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\bin\Debug\AwesomeCalendar.Contracts.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\bin\Debug\AwesomeCalendar.Infrastructure.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\bin\Debug\Autofac.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\bin\Debug\AwesomeCalendar.Infrastructure.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\bin\Debug\Autofac.xml
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\obj\Debug\AwesomeCalendar.Contracts.csprojResolveAssemblyReference.cache
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\obj\Debug\AwesomeCalendar.Contracts.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.Contracts\obj\Debug\AwesomeCalendar.Contracts.pdb

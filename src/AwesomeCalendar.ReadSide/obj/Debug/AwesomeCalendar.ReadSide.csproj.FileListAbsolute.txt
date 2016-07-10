@@ -1,0 +1,9 @@
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\bin\Debug\AwesomeCalendar.ReadSide.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\bin\Debug\AwesomeCalendar.ReadSide.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\bin\Debug\Autofac.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\bin\Debug\AwesomeCalendar.Infrastructure.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\bin\Debug\AwesomeCalendar.Infrastructure.pdb
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\bin\Debug\Autofac.xml
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\obj\Debug\AwesomeCalendar.ReadSide.csprojResolveAssemblyReference.cache
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\obj\Debug\AwesomeCalendar.ReadSide.dll
+C:\REPO\AwesomeCalendar\src\AwesomeCalendar.ReadSide\obj\Debug\AwesomeCalendar.ReadSide.pdb
