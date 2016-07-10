@@ -1,7 +1,7 @@
 ﻿namespace AwesomeCalendar.Infrastructure.Interfaces.Contracts
 {
-    public interface IHandle<in TCommand> where TCommand : class, IEvent
+    public interface IHandle<in TEvent> where TEvent : class, IEvent
     {
-        void Handle(TCommand command);
+        void Handle(TEvent @event);
     }
 }
