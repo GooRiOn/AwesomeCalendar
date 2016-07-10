@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using AwesomeCalendar.Domain.Factories;
-using AwesomeCalendar.Infrastructure.Interfaces.Factories;
+using AwesomeCalendar.Infrastructure.Interfaces.Executors;
 
 namespace AwesomeCalendar.Domain.DependencyInjection
 {
@@ -10,7 +10,7 @@ namespace AwesomeCalendar.Domain.DependencyInjection
         {
             DataAccess.DependencyInjection.Registration.Register(containerBuilder);
 
-            containerBuilder.RegisterType<CommandHandlerFactory>().As<ICommandHandlerFactory>();
+            containerBuilder.RegisterType<CommandHandlerExecutor>().As<ICommandHandlerExecutor>();
 
 
             containerBuilder.RegisterType<EventHandlerExecutor>().As<IEventHandlerExecutor>();

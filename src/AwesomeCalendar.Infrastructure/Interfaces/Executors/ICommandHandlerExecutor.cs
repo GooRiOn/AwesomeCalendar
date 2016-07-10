@@ -3,8 +3,8 @@ using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Factories
 {
-    public interface IEventHandlerFactory
+    public interface ICommandHandlerExecutor
     {
-        IEventHandler<TEvent> Get<TEvent>() where TEvent : class, IEvent;
+        void Execute<TCommand>(TCommand command) where TCommand : class, ICommand;
     }
 }
