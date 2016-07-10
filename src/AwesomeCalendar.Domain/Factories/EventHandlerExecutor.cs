@@ -1,6 +1,6 @@
 ﻿using AwesomeCalendar.Infrastructure.DependencyInjection.Interfaces;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
-using AwesomeCalendar.Infrastructure.Interfaces.Factories;
+using AwesomeCalendar.Infrastructure.Interfaces.Executors;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
 namespace AwesomeCalendar.Domain.Factories

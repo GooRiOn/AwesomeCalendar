@@ -10,11 +10,11 @@ namespace AwesomeCalendar.Messaging.Busses
     public class CommandBus : ICommandBus
     {
         IBus Bus { get; }
-        ICommandHandlerExecutor CommandHandlerFactory { get; }
+        ICommandHandlerExecutor CommandHandlerExecutor { get; }
 
-        public CommandBus(ICommandHandlerExecutor commandHandlerFactory)
+        public CommandBus(ICommandHandlerExecutor commandHandlerExecutor)
         {
-            CommandHandlerFactory = commandHandlerFactory;
+            CommandHandlerExecutor = commandHandlerExecutor;
 
             Bus = RabbitHutch.CreateBus("host=localhost");
             Bus.Receive(nameof(CommandBus), (Action<ICommand>) ProccessBus);
@@ -23,17 +23,19 @@ namespace AwesomeCalendar.Messaging.Busses
         public void Send<TCommand>(TCommand command) where TCommand : class, ICommand =>
             Bus.Publish(command);
 
+
         public async Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand =>
             await Bus.PublishAsync(command);
 
-        void ProccessBus(ICommand command)
+
+        void ProccessBus(ICommand command) 
         {
             var commandType = command.GetType();
-            var executorType = CommandHandlerFactory.GetType();
+            var executorType = CommandHandlerExecutor.GetType();
 
             executorType.GetMethod(nameof(ICommandHandlerExecutor.Execute))
                 .MakeGenericMethod(commandType)
-                .Invoke(CommandHandlerFactory, new[] {command});
+                .Invoke(CommandHandlerExecutor, new[] {command});
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
-using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
-namespace AwesomeCalendar.Infrastructure.Interfaces.Factories
+namespace AwesomeCalendar.Infrastructure.Interfaces.Executors
 {
     public interface ICommandHandlerExecutor
     {

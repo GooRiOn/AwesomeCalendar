@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregates\AggragateRoot.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
+    <Compile Include="Factories\CommandHandlerExecutor.cs" />
+    <Compile Include="Factories\EventHandlerExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

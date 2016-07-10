@@ -47,14 +47,21 @@
     <Compile Include="DependencyInjection\CustomDependencyResolver.cs" />
     <Compile Include="DependencyInjection\Interfaces\ICustomDependencyResolver.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
+    <Compile Include="Interfaces\Busses\ICommandBus.cs" />
+    <Compile Include="Interfaces\Busses\IEventBus.cs" />
+    <Compile Include="Interfaces\Contracts\ICommand.cs" />
+    <Compile Include="Interfaces\Contracts\IEvent.cs" />
+    <Compile Include="Interfaces\Contracts\IHandle.cs" />
+    <Compile Include="Interfaces\Executors\ICommandHandlerExecutor.cs" />
+    <Compile Include="Interfaces\Executors\IEventHandlerExecutor.cs" />
+    <Compile Include="Interfaces\Handlers\ICommandHandler.cs" />
+    <Compile Include="Interfaces\Handlers\IEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,8 +2,8 @@
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Handlers
 {
-    public interface ICommandHandler<in TCommand> : IHandle<TCommand> where TCommand : class, ICommand
+    public interface ICommandHandler<in TCommand> where TCommand : class, ICommand
     {
-        
+        void Handle(TCommand command);
     }
 }
