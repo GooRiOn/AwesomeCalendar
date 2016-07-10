@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
 namespace AwesomeCalendar.DataAccess.DependencyInjection
 {
@@ -6,7 +7,8 @@ namespace AwesomeCalendar.DataAccess.DependencyInjection
     {
         public static void Register(ContainerBuilder containerBuilder)
         {
-            
+            containerBuilder.RegisterType<EventStoreContext>().AsSelf();
+            containerBuilder.RegisterType<EventStore>().As<IEventStore>();
         }
     }
 }

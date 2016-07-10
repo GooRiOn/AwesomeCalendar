@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Domain.Aggregates
 {
-    public abstract class AggragateRoot
+    public abstract class AggregateRoot : IAggregateRoot
     {
         public Guid Id { get; set; }
 
         public int Version { get; set; }
 
-        protected List<IEvent> Events { get; set; } = new List<IEvent>();
-
         public List<IEvent> GetUncommittedEvents() => Events;
 
         public void MarkEventsAsCommitted() => Events.Clear();
+
+        protected List<IEvent> Events { get; set; } = new List<IEvent>();
 
         public virtual void LoadFromHistory(IEnumerable<IEvent> events)
         {
