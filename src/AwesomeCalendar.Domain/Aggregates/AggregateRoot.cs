@@ -20,17 +20,19 @@ namespace AwesomeCalendar.Domain.Aggregates
         public virtual void LoadFromHistory(IEnumerable<IEvent> events)
         {
             foreach (var @event in events)
-                ApplyChange(@event);
+                ApplyChange(@event, false);
         }
 
-        protected void ApplyChange(IEvent @event)
+        protected void ApplyChange(IEvent @event, bool isNew = true)
         {
             var aggregateType = GetType();
 
             var eventType = @event.GetType();
 
             aggregateType.GetMethod(nameof(IHandle<IEvent>.Handle), new[] { eventType })
-                    .Invoke(this, new object[] { @event });
+                .Invoke(this, new object[] { @event });
+
+            if(isNew) Events.Add(@event);
         }
     }
 }
