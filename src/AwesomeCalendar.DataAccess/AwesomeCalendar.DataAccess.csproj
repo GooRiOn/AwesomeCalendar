@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyInjection\Registration.cs" />
+    <Compile Include="EventStore.cs" />
+    <Compile Include="EventStoreContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
