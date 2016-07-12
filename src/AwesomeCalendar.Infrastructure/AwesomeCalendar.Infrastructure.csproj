@@ -47,6 +47,7 @@
     <Compile Include="DependencyInjection\CustomDependencyResolver.cs" />
     <Compile Include="DependencyInjection\Interfaces\ICustomDependencyResolver.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
+    <Compile Include="Enums\CalendarItemCycleType.cs" />
     <Compile Include="Interfaces\Aggragates\IAggregateRoot.cs" />
     <Compile Include="Interfaces\Busses\ICommandBus.cs" />
     <Compile Include="Interfaces\Busses\IEventBus.cs" />

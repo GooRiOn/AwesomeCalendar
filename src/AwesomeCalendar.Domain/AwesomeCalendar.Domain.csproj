@@ -45,9 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregates\AggregateRoot.cs" />
+    <Compile Include="Aggregates\CalendarItem.cs" />
+    <Compile Include="Aggregates\CalendarItemCycle.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="Factories\CommandHandlerExecutor.cs" />
     <Compile Include="Factories\EventHandlerExecutor.cs" />
+    <Compile Include="Handlers\CreateCalendarItemCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

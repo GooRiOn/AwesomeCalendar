@@ -1,12 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AwesomeCalendar.Contracts.Commands;
+using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
+using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
 namespace AwesomeCalendar.Domain.Handlers
 {
-    class CreateCalendarItemCommandHandler
+    public class CreateCalendarItemCommandHandler : ICommandHandler<CreateCalendarItemCommand>
     {
+        IEventStore EventStore { get; }
+
+        public CreateCalendarItemCommandHandler(IEventStore eventStore)
+        {
+            EventStore = eventStore;
+        }
+
+        public void Handle(CreateCalendarItemCommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Validate(CreateCalendarItemCommand command)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

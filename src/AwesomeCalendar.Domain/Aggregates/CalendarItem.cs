@@ -10,6 +10,8 @@ namespace AwesomeCalendar.Domain.Aggregates
         IHandle<CalendarItemCreatedEvent>, 
         IHandle<CalendarItemCycleCreatedEvent>
     {
+        public string UserId { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -18,14 +20,15 @@ namespace AwesomeCalendar.Domain.Aggregates
 
         public DateTime EndDate { get; set; }
        
-        List<CalendarItemCycle> Cycles { get; set; }
+        List<CalendarItemCycle> Cycles { get; }
 
 
-        public CalendarItem(Guid id, string description, DateTime startDate, DateTime endDate, IEnumerable<Contracts.Commands.CalendarItemCycle> cycles)
+        public CalendarItem(Guid id, string userId, string description, DateTime startDate, DateTime endDate, IEnumerable<Contracts.Commands.CalendarItemCycle> cycles)
         {
             ApplyChange(new CalendarItemCreatedEvent
             {
                 AggregateId = id,
+                UserId = userId,
                 Description = description,
                 StartDate = startDate,
                 EndDate = endDate
@@ -49,15 +52,14 @@ namespace AwesomeCalendar.Domain.Aggregates
         public void Handle(CalendarItemCreatedEvent @event)
         {
             Id = @event.AggregateId;
+            UserId = @event.UserId;
             Name = @event.Name;
             Description = @event.Description;
             StartDate = @event.StartDate;
             EndDate = @event.EndDate;
         }
 
-        public void Handle(CalendarItemCycleCreatedEvent @event)
-        {
+        public void Handle(CalendarItemCycleCreatedEvent @event) =>
             Cycles.Add(new CalendarItemCycle(@event.EndTime,@event.Interval, @event.Type));
-        }
     }
 }
