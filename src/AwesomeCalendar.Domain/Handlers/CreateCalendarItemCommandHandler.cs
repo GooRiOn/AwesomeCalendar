@@ -1,5 +1,8 @@
 ﻿using System;
 using AwesomeCalendar.Contracts.Commands;
+using AwesomeCalendar.Domain.Aggregates;
+using AwesomeCalendar.Infrastructure.Enums;
+using AwesomeCalendar.Infrastructure.Exceptions;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
@@ -16,12 +19,19 @@ namespace AwesomeCalendar.Domain.Handlers
 
         public void Handle(CreateCalendarItemCommand command)
         {
-            throw new NotImplementedException();
+            Validate(command);
+
+            var calendarItem = new CalendarItem(command.Id, command.UserId, command.Name,command.Description,command.StartDate,command.EndDate,command.Cycles);
+            EventStore.Persist(calendarItem);
         }
 
         public void Validate(CreateCalendarItemCommand command)
         {
-            throw new NotImplementedException();
+            if(command == null)
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.NullCommand, typeof(CreateCalendarItemCommand));
+
+            if(command.Id == Guid.Empty || string.IsNullOrEmpty(command.UserId) || string.IsNullOrEmpty(command.Name) || command.StartDate > command.EndDate)
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.InvalidCommand, typeof(CreateCalendarItemCommand));
         }
     }
 }

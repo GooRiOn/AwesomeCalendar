@@ -23,16 +23,20 @@ namespace AwesomeCalendar.Domain.Aggregates
         List<CalendarItemCycle> Cycles { get; }
 
 
-        public CalendarItem(Guid id, string userId, string description, DateTime startDate, DateTime endDate, IEnumerable<Contracts.Commands.CalendarItemCycle> cycles)
+        public CalendarItem(Guid id, string userId, string name, string description, 
+            DateTime startDate, DateTime endDate, IEnumerable<Contracts.Commands.CalendarItemCycle> cycles)
         {
             ApplyChange(new CalendarItemCreatedEvent
             {
                 AggregateId = id,
                 UserId = userId,
+                Name = name,
                 Description = description,
                 StartDate = startDate,
                 EndDate = endDate
             });
+
+            if (cycles == null) return;
 
             foreach (var cycle in cycles)
                 ApplyChange(new CalendarItemCycleCreatedEvent
