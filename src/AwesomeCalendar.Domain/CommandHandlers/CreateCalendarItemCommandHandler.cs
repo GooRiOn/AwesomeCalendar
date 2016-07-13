@@ -19,13 +19,13 @@ namespace AwesomeCalendar.Domain.Handlers
 
         public void Handle(CreateCalendarItemCommand command)
         {
-            Validate(command);
+            ((ICommandHandler<CreateCalendarItemCommand>) this).Validate(command);
 
             var calendarItem = new CalendarItem(command.Id, command.UserId, command.Name,command.Description,command.StartDate,command.EndDate,command.Cycles);
             EventStore.Persist(calendarItem);
         }
 
-        public void Validate(CreateCalendarItemCommand command)
+        void ICommandHandler<CreateCalendarItemCommand>.Validate(CreateCalendarItemCommand command)
         {
             if(command == null)
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.NullCommand, typeof(CreateCalendarItemCommand));
