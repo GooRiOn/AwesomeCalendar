@@ -65,6 +65,20 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AwesomeCalendar.Contracts\AwesomeCalendar.Contracts.csproj">
+      <Project>{601888c4-d9fe-4d96-a834-538bfeccaac7}</Project>
+      <Name>AwesomeCalendar.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\AwesomeCalendar.Domain\AwesomeCalendar.Domain.csproj">
+      <Project>{1a4da0fb-926d-4e3b-8c7a-7829d121c2b6}</Project>
+      <Name>AwesomeCalendar.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\AwesomeCalendar.Infrastructure\AwesomeCalendar.Infrastructure.csproj">
+      <Project>{423D9485-CB8C-4402-98D4-AF4918F09F5C}</Project>
+      <Name>AwesomeCalendar.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

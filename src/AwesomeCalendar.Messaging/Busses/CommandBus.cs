@@ -21,21 +21,23 @@ namespace AwesomeCalendar.Messaging.Busses
         }
 
         public void Send<TCommand>(TCommand command) where TCommand : class, ICommand =>
-            Bus.Publish(command);
+            Bus.Send(nameof(CommandBus),command);
 
 
         public async Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand =>
-            await Bus.PublishAsync(command);
+            await Bus.SendAsync(nameof(CommandBus), command);
 
 
         void ProccessBus(ICommand command) 
         {
+            Bus.Respond<ICommand, string>(responder => "test");
+
             var commandType = command.GetType();
             var executorType = CommandHandlerExecutor.GetType();
 
             executorType.GetMethod(nameof(ICommandHandlerExecutor.Execute))
                 .MakeGenericMethod(commandType)
-                .Invoke(CommandHandlerExecutor, new[] {command});
+                .Invoke(CommandHandlerExecutor, new[] { command });
         }
     }
 }

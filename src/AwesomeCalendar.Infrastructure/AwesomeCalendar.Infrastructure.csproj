@@ -47,6 +47,9 @@
     <Compile Include="DependencyInjection\CustomDependencyResolver.cs" />
     <Compile Include="DependencyInjection\Interfaces\ICustomDependencyResolver.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
+    <Compile Include="Enums\AwesomeCalendarExceptionType.cs" />
+    <Compile Include="Enums\CalendarItemCycleType.cs" />
+    <Compile Include="Exceptions\AwesomeCalendarException.cs" />
     <Compile Include="Interfaces\Aggragates\IAggregateRoot.cs" />
     <Compile Include="Interfaces\Busses\ICommandBus.cs" />
     <Compile Include="Interfaces\Busses\IEventBus.cs" />
@@ -58,6 +61,9 @@
     <Compile Include="Interfaces\Executors\IEventHandlerExecutor.cs" />
     <Compile Include="Interfaces\Handlers\ICommandHandler.cs" />
     <Compile Include="Interfaces\Handlers\IEventHandler.cs" />
+    <Compile Include="Interfaces\ReadSide\IInternalEntity.cs" />
+    <Compile Include="Interfaces\ReadSide\IRepository.cs" />
+    <Compile Include="Interfaces\ReadSide\ISoftDeletable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
