@@ -48,9 +48,11 @@
     <Compile Include="Aggregates\CalendarItem.cs" />
     <Compile Include="Aggregates\CalendarItemCycle.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
+    <Compile Include="EventHandlers\CalendarItemCreatedEventHandler.cs" />
+    <Compile Include="EventHandlers\CalendarItemCycleCreatedEventHandler.cs" />
     <Compile Include="Factories\CommandHandlerExecutor.cs" />
     <Compile Include="Factories\EventHandlerExecutor.cs" />
-    <Compile Include="Handlers\CreateCalendarItemCommandHandler.cs" />
+    <Compile Include="CommandHandlers\CreateCalendarItemCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

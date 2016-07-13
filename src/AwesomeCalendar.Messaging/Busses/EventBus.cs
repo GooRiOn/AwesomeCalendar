@@ -21,11 +21,11 @@ namespace AwesomeCalendar.Messaging.Busses
         }
 
         public void Send<TEvent>(TEvent @event) where TEvent : class, IEvent =>
-            Bus.Publish(@event);
+            Bus.Send(nameof(EventBus), @event);
 
 
         public async Task SendAsync<TEvent>(TEvent @event) where TEvent : class, IEvent =>
-            await Bus.PublishAsync(@event);
+            await Bus.SendAsync(nameof(EventBus), @event);
 
 
         void ProccessBus(IEvent @event)

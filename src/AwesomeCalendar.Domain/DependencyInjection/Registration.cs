@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using AwesomeCalendar.Contracts.Commands;
+using AwesomeCalendar.Contracts.Events;
+using AwesomeCalendar.Domain.CommandHandlers;
+using AwesomeCalendar.Domain.EventHandlers;
 using AwesomeCalendar.Domain.Factories;
-using AwesomeCalendar.Domain.Handlers;
 using AwesomeCalendar.Infrastructure.Interfaces.Executors;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
@@ -18,6 +20,8 @@ namespace AwesomeCalendar.Domain.DependencyInjection
 
 
             containerBuilder.RegisterType<EventHandlerExecutor>().As<IEventHandlerExecutor>();
+            containerBuilder.RegisterType<CalendarItemCreatedEventHandler>().As<IEventHandler<CalendarItemCreatedEvent>>();
+            containerBuilder.RegisterType<CalendarItemCycleCreatedEventHandler>().As<IEventHandler<CalendarItemCycleCreatedEvent>>();
         }
     }
 }

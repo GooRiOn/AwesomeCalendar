@@ -6,6 +6,10 @@ namespace AwesomeCalendar.ReadSide.Entities
 {
     public class CalendarItemCycleEntity : InternalEntity
     {
+        public CalendarItemCycleEntity()
+        {
+            Id = Guid.NewGuid();
+        }
         public Guid CalendarItemId { get; set; }
 
         [ForeignKey("CalendarItemId")]

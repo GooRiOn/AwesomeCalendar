@@ -1,34 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using AwesomeCalendar.Infrastructure.Interfaces.ReadSide;
 
 namespace AwesomeCalendar.ReadSide.Entities
 {
-    public class InternalEntity : IInternalEntity, ISoftDeletable
+    public abstract class InternalEntity : IInternalEntity, ISoftDeletable
     {
+        [Key]
         public Guid Id { get; set; }
-        public DateTime CreatedDate { get; }
-        public DateTime UpdateDate { get; private set; }
+
         public bool IsDeleted { get; private set; }
 
-        public InternalEntity()
+        protected InternalEntity()
         {
             IsDeleted = false;
-            CreatedDate = DateTime.UtcNow;
-            UpdateDate = DateTime.UtcNow;
         }
 
-        void ISoftDeletable.Delete()
+        void ISoftDeletable.SoftDelete()
         {
             IsDeleted = true;
-        }
-
-        void ISoftDeletable.SetUpdatedDate(DateTime updatedDate)
-        {
-            UpdateDate = updatedDate;
         }
     }
 }

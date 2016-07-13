@@ -20,7 +20,7 @@ namespace AwesomeCalendar.Domain.Aggregates
 
         public DateTime EndDate { get; set; }
        
-        List<CalendarItemCycle> Cycles { get; }
+        List<CalendarItemCycle> Cycles { get; } = new List<CalendarItemCycle>();
 
 
         public CalendarItem(Guid id, string userId, string name, string description, 

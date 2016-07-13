@@ -1,7 +1,12 @@
-﻿namespace AwesomeCalendar.ReadSide.Repositories
+﻿using AwesomeCalendar.ReadSide.Entities;
+using AwesomeCalendar.ReadSide.Repositories.Interfaces;
+
+namespace AwesomeCalendar.ReadSide.Repositories
 {
-    public class CalendarItemRepository
+    public sealed class CalendarItemRepository : Repository<CalendarItemEntity>, ICalendarItemRepository
     {
-        
+        public CalendarItemRepository(ReadSideContext readSideContext) : base(readSideContext)
+        {
+        }
     }
 }

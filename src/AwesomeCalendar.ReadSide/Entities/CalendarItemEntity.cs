@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 
 namespace AwesomeCalendar.ReadSide.Entities
 {
@@ -9,6 +8,11 @@ namespace AwesomeCalendar.ReadSide.Entities
         public CalendarItemEntity()
         {
             Cycles = new HashSet<CalendarItemCycleEntity>();
+        }
+
+        public CalendarItemEntity(Guid id) :this()
+        {
+            Id = id;
         }
 
         public string UserId { get; set; }

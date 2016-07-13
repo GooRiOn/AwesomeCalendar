@@ -6,7 +6,7 @@ using AwesomeCalendar.Infrastructure.Exceptions;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 
-namespace AwesomeCalendar.Domain.Handlers
+namespace AwesomeCalendar.Domain.CommandHandlers
 {
     public class CreateCalendarItemCommandHandler : ICommandHandler<CreateCalendarItemCommand>
     {

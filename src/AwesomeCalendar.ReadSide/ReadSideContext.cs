@@ -10,6 +10,11 @@ namespace AwesomeCalendar.ReadSide
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ReadSideContext>());
         }
 
+        public ReadSideContext() :base(nameof(ReadSideContext))
+        {
+            
+        }
+
         public DbSet<CalendarItemEntity> CalendarItems { get; set; }
 
         public DbSet<CalendarItemCycleEntity> CalendarItemCycles { get; set; }
