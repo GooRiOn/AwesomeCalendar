@@ -42,7 +42,8 @@ namespace AwesomeCalendar.DataAccess
 
         public TAggregate GetById<TAggregate,TEvent>(Guid id) 
             where TAggregate : IAggregateRoot, new()
-            where TEvent : class, IEvent 
+            where TEvent : class, IEvent
+            
         {
             var events = Context.Set<TEvent>().Where(e => e.AggregateId == id).AsNoTracking().ToList();
 
