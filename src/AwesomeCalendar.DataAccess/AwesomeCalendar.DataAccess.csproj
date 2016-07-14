@@ -56,6 +56,7 @@
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="EventStore.cs" />
     <Compile Include="EventStoreContext.cs" />
+    <Compile Include="FakeEventStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
