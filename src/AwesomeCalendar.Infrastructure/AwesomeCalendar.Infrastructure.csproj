@@ -49,6 +49,7 @@
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="Enums\AwesomeCalendarExceptionType.cs" />
     <Compile Include="Enums\CalendarItemCycleType.cs" />
+    <Compile Include="Enums\CalendarItemEditionType.cs" />
     <Compile Include="Exceptions\AwesomeCalendarException.cs" />
     <Compile Include="Interfaces\Aggragates\IAggregateRoot.cs" />
     <Compile Include="Interfaces\Busses\ICommandBus.cs" />

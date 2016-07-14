@@ -8,8 +8,7 @@ namespace AwesomeCalendar.Infrastructure.Interfaces.DataAccess
     {
         void Persist<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregateRoot;
 
-        TAggregate GetById<TAggregate, TEvent>(Guid id)
-            where TAggregate : IAggregateRoot, new()
-            where TEvent : class, IEvent;
+        TAggregate GetById<TAggregate, TEvent>(Guid id) where TAggregate : IAggregateRoot, new() where TEvent : class, IEvent;
+
     }
 }

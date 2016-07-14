@@ -6,9 +6,9 @@ namespace AwesomeCalendar.Infrastructure.Exceptions
 {
     public class AwesomeCalendarException : Exception
     {
-        AwesomeCalendarExceptionType Type { get; }
-        Type SourceType { get; }
-        string Message { get; set; }
+        public AwesomeCalendarExceptionType Type { get; }
+        public Type SourceType { get; }
+        public string Message { get; set; }
 
         public AwesomeCalendarException(AwesomeCalendarExceptionType type, Type sourceType ,string message = null)
         {
