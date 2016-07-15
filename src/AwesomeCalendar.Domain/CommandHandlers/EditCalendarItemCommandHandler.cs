@@ -23,7 +23,14 @@ namespace AwesomeCalendar.Domain.CommandHandlers
         {
             var calendarItem = EventStore.GetById<CalendarItem, CalendarItemBaseEvent>(command.Id);
 
-            calendarItem.Edit(command.UserId,command.Name,command.Description,command.EditionType,command.StartDate,command.EndDate,command.Cycles.ToList());
+            calendarItem.Edit(
+                command.UserId,
+                command.Name,
+                command.Description,
+                command.EditionType,
+                command.StartDate,
+                command.EndDate,
+                command.Cycles.ToList());
 
             EventStore.Persist(calendarItem);
         }
@@ -33,7 +40,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
             if( command == null)
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.NullCommand, typeof(EditCalendarItemCommand));
 
-            if(command.Id == Guid.Empty || string.IsNullOrEmpty(command.Name) || command.StartDate > command.EndDate)
+            if(command.Id == Guid.Empty || string.IsNullOrEmpty(command.UserId) || string.IsNullOrEmpty(command.Name) || command.StartDate > command.EndDate)
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.InvalidCommand, typeof(EditCalendarItemCommand));
         }
     }

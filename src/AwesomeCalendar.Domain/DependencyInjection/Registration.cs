@@ -17,8 +17,7 @@ namespace AwesomeCalendar.Domain.DependencyInjection
 
             containerBuilder.RegisterType<CommandHandlerExecutor>().As<ICommandHandlerExecutor>();
             containerBuilder.RegisterType<CreateCalendarItemCommandHandler>().As<ICommandHandler<CreateCalendarItemCommand>>();
-            containerBuilder.RegisterType<EditCalendarItemCommandHandler>()
-                .As<ICommandHandler<EditCalendarItemCommand>>();
+            containerBuilder.RegisterType<EditCalendarItemCommandHandler>().As<ICommandHandler<EditCalendarItemCommand>>();
 
 
             containerBuilder.RegisterType<EventHandlerExecutor>().As<IEventHandlerExecutor>();
