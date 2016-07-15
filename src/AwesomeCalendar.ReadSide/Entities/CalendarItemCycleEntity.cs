@@ -15,7 +15,7 @@ namespace AwesomeCalendar.ReadSide.Entities
         [ForeignKey("CalendarItemId")]
         public CalendarItemEntity CalendarItem { get; set; }
 
-        public DateTime? EndTime { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public CalendarItemCycleType Type { get; set; }
 

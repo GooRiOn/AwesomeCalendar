@@ -47,6 +47,8 @@
     <Compile Include="Aggregates\AggregateRoot.cs" />
     <Compile Include="Aggregates\CalendarItem.cs" />
     <Compile Include="Aggregates\CalendarItemCycle.cs" />
+    <Compile Include="Aggregates\CalendarItemCycleExclusion.cs" />
+    <Compile Include="CommandHandlers\EditCalendarItemCommandHandler.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="EventHandlers\CalendarItemCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\CalendarItemCycleCreatedEventHandler.cs" />
