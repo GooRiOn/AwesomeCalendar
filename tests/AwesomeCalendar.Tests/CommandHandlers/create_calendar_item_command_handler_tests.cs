@@ -34,6 +34,9 @@ namespace AwesomeCalendar.Tests.CommandHandlers
         [Theory, AutoData]
         public void persists_event_to_event_store_needed_to_reconstruct_calendar_item(CreateCalendarItemCommand command)
         {
+            command.StartDate = DateTime.UtcNow;
+            command.EndDate = DateTime.UtcNow.AddHours(1);
+
             act(command);
             var createdAggreagte = EventStore.GetById<CalendarItem, CalendarItemBaseEvent>(command.Id);
 

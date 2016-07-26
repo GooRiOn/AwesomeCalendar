@@ -61,18 +61,7 @@ namespace AwesomeCalendar.Domain.Aggregates
         public void Edit(string userId, string name, string description, CalendarItemEditionType editionType,
             DateTime startDate, DateTime endDate, List<Contracts.Commands.CalendarItemCycle> cycles)
         {
-            switch (editionType)
-            {
-                case CalendarItemEditionType.Single:
-                    EditSingleItem(name, description, startDate, endDate);
-                    break;
-                case CalendarItemEditionType.CurrentAndFuture:
-                    EditCurrentAndFutureItems(userId, name, description, startDate, endDate, cycles);
-                    break;
-                case CalendarItemEditionType.All:
-                    EditAllItems(name, description, startDate, endDate, cycles);
-                    break;
-            }
+            throw new NotImplementedException();
         }
 
         public void Handle(CalendarItemCreatedEvent @event)
