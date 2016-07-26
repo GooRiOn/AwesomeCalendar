@@ -1,5 +1,6 @@
 [Oo]bj/
 [Bb]in/
+Web.config
 _ReSharper.*
 *.user
 *.suo
