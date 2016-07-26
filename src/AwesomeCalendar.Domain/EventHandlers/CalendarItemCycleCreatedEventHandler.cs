@@ -21,6 +21,7 @@ namespace AwesomeCalendar.Domain.EventHandlers
                 CalendarItemId = @event.AggregateId,
                 Type = @event.Type,
                 Interval = @event.Interval,
+                StartDate = @event.StartDate,
                 EndDate = @event.EndDate
             });
         }
