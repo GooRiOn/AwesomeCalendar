@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
@@ -25,11 +26,11 @@ namespace AwesomeCalendar.Domain.Aggregates
 
         protected void ApplyChange(IEvent @event, bool isNew = true)
         {
-            var aggregateType = GetType();
+            var handleType = typeof(IHandle<>).MakeGenericType(@event.GetType());
 
             var eventType = @event.GetType();
 
-            aggregateType.GetMethod(nameof(IHandle<IEvent>.Handle), new[] { eventType })
+            handleType.GetMethod(nameof(IHandle<IEvent>.Handle), new[] { eventType })
                 .Invoke(this, new object[] { @event });
 
             if(isNew) Events.Add(@event);

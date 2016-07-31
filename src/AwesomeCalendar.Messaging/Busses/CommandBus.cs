@@ -30,8 +30,6 @@ namespace AwesomeCalendar.Messaging.Busses
 
         void ProccessBus(ICommand command) 
         {
-            Bus.Respond<ICommand, string>(responder => "test");
-
             var commandType = command.GetType();
             var executorType = CommandHandlerExecutor.GetType();
 
