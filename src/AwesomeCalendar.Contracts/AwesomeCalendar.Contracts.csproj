@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CreateCalendarItemCommand.cs" />
+    <Compile Include="Commands\DeleteCalendarItemCommand.cs" />
     <Compile Include="Commands\EditCalendarItemCommand.cs" />
     <Compile Include="Events\CalendarItemBaseEvent.cs" />
     <Compile Include="Events\CalendarItemCreatedEvent.cs" />
