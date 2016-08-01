@@ -15,17 +15,17 @@ namespace AwesomeCalendar.Domain.Aggregates
         IHandle<CalendarItemCycleEditedEvent>,
         IHandle<CycleExclusionCreatedEvent>
     {
-        public string UserId { get; set; }
+        public string UserId { get; private set; }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; private set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; private set; }
        
-        List<CalendarItemCycle> Cycles { get; } = new List<CalendarItemCycle>();
+        public List<CalendarItemCycle> Cycles { get; private set; } = new List<CalendarItemCycle>();
 
 
         public CalendarItem(Guid id, string userId, string name, string description, 

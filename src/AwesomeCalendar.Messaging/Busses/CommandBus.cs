@@ -17,7 +17,7 @@ namespace AwesomeCalendar.Messaging.Busses
             CommandHandlerExecutor = commandHandlerExecutor;
 
             Bus = RabbitHutch.CreateBus("host=localhost");
-            Bus.Receive(nameof(CommandBus), (Action<ICommand>) ProccessBus);
+            Bus.Receive(nameof(CommandBus), (ICommand command) => ProccessBus(command));
         }
 
         public void Send<TCommand>(TCommand command) where TCommand : class, ICommand =>

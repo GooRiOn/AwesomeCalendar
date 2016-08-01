@@ -7,7 +7,7 @@ namespace AwesomeCalendar.Contracts.Commands
 {
     public class EditCalendarItemCommand : ICommand
     {
-        public Guid Id { get; } = Guid.NewGuid();
+        public Guid Id { get; }
 
         public string UserId { get; set; }
 
@@ -22,5 +22,10 @@ namespace AwesomeCalendar.Contracts.Commands
         public IEnumerable<CalendarItemCycle> Cycles { get; set; }
 
         public CalendarItemEditionType EditionType { get; set; }
+
+        public EditCalendarItemCommand(Guid id)
+        {
+            Id = id;
+        }
     }
 }

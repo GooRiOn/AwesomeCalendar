@@ -8,9 +8,9 @@ namespace AwesomeCalendar.Domain.Aggregates
 {
     public abstract class AggregateRoot : IAggregateRoot
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; protected set; }
 
-        public int Version { get; set; }
+        public int Version { get; protected set; }
 
         public List<IEvent> GetUncommittedEvents() => Events;
 
