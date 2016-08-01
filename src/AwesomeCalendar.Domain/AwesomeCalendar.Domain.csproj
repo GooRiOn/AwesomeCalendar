@@ -53,6 +53,7 @@
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="EventHandlers\CalendarItemCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\CalendarItemCycleCreatedEventHandler.cs" />
+    <Compile Include="EventHandlers\CalendarItemDeletedEventHandler.cs" />
     <Compile Include="Factories\CommandHandlerExecutor.cs" />
     <Compile Include="Factories\EventHandlerExecutor.cs" />
     <Compile Include="CommandHandlers\CreateCalendarItemCommandHandler.cs" />

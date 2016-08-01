@@ -47,6 +47,7 @@
     <Compile Include="Events\CalendarItemCreatedEvent.cs" />
     <Compile Include="Events\CalendarItemCycleCreatedEvent.cs" />
     <Compile Include="Events\CalendarItemCycleEditedEvent.cs" />
+    <Compile Include="Events\CalendarItemDeletedEvent.cs" />
     <Compile Include="Events\CalendarItemEditedEvent.cs" />
     <Compile Include="Events\CycleExclusionCreatedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
