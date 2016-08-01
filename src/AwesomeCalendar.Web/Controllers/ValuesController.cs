@@ -35,6 +35,8 @@ namespace AwesomeCalendar.Web.Controllers
                 {
                     new CalendarItemCycle
                     {
+                        Id = Guid.NewGuid(),
+                        StartDate = DateTime.UtcNow,
                         Type = CalendarItemCycleType.Daily,
                         Interval = 1
                     }

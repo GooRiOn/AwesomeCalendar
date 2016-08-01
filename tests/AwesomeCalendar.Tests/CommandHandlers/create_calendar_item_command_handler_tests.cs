@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.DataAccess;
@@ -51,46 +52,21 @@ namespace AwesomeCalendar.Tests.CommandHandlers
 
             exception.ShouldBeOfType(typeof(AwesomeCalendarException));
             Assert.Equal(((AwesomeCalendarException)exception).Type,AwesomeCalendarExceptionType.NullCommand);
-        }
+        }       
 
-        [Theory, AutoData]
-        public void throws_when_command_has_empty_id(CreateCalendarItemCommand command)
+        [Theory]
+        [InlineData("","name", "2016-12-12", "2016-12-23")]
+        [InlineData("userId", "", "2016-12-12", "2016-12-23")]
+        [InlineData("userId", "name", "2016-12-12", "2016-12-11")]
+        public void throws_when_command_has_invalid_data(string userId, string name, DateTime startDate, DateTime endDate)
         {
-            command.Id = Guid.Empty;
-            
-            var exception = Record.Exception(() => act(command));
-
-            exception.ShouldBeOfType(typeof(AwesomeCalendarException));
-            Assert.Equal(((AwesomeCalendarException)exception).Type, AwesomeCalendarExceptionType.InvalidCommand);
-        }
-
-        [Theory, AutoData]
-        public void throws_when_command_has_empty_user_id(CreateCalendarItemCommand command)
-        {
-            command.UserId = String.Empty;
-
-            var exception = Record.Exception(() => act(command));
-
-            exception.ShouldBeOfType(typeof(AwesomeCalendarException));
-            Assert.Equal(((AwesomeCalendarException)exception).Type, AwesomeCalendarExceptionType.InvalidCommand);
-        }
-
-        [Theory, AutoData]
-        public void throws_when_command_has_empty_name(CreateCalendarItemCommand command)
-        {
-            command.Name = String.Empty;
-
-            var exception = Record.Exception(() => act(command));
-
-            exception.ShouldBeOfType(typeof(AwesomeCalendarException));
-            Assert.Equal(((AwesomeCalendarException)exception).Type, AwesomeCalendarExceptionType.InvalidCommand);
-        }
-
-        [Theory, AutoData]
-        public void throws_when_commands_end_date_is_earlier_than_start_date(CreateCalendarItemCommand command)
-        {
-            command.StartDate = DateTime.MaxValue;
-            command.EndDate = DateTime.MinValue;
+            var command = new CreateCalendarItemCommand
+            {
+                UserId = userId,
+                Name = name,
+                StartDate = startDate,
+                EndDate = endDate
+            };
 
             var exception = Record.Exception(() => act(command));
 

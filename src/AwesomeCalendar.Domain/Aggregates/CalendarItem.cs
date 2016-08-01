@@ -49,7 +49,8 @@ namespace AwesomeCalendar.Domain.Aggregates
                     AggregateId = id,
                     EndDate = cycle.EndDate,
                     Interval = cycle.Interval,
-                    Type = cycle.Type
+                    Type = cycle.Type,
+                    StartDate = cycle.StartDate
                 });
         }
 
@@ -64,7 +65,7 @@ namespace AwesomeCalendar.Domain.Aggregates
             throw new NotImplementedException();
         }
 
-        public void Handle(CalendarItemCreatedEvent @event)
+        void IHandle<CalendarItemCreatedEvent>.Handle(CalendarItemCreatedEvent @event)
         {
             Id = @event.AggregateId;
             UserId = @event.UserId;
@@ -74,10 +75,10 @@ namespace AwesomeCalendar.Domain.Aggregates
             EndDate = @event.EndDate;
         }
 
-        public void Handle(CalendarItemCycleCreatedEvent @event) =>
+        void IHandle<CalendarItemCycleCreatedEvent>.Handle(CalendarItemCycleCreatedEvent @event) =>
             Cycles.Add(new CalendarItemCycle(@event.StartDate, @event.EndDate,@event.Interval, @event.Type));
 
-        public void Handle(CalendarItemEditedEvent @event)
+        void IHandle<CalendarItemEditedEvent>.Handle(CalendarItemEditedEvent @event)
         {
             Name = @event.Name;
             Description = @event.Description;
@@ -85,7 +86,7 @@ namespace AwesomeCalendar.Domain.Aggregates
             EndDate = @event.EndDate;
         }
 
-        public void Handle(CalendarItemCycleEditedEvent @event)
+        void IHandle<CalendarItemCycleEditedEvent>.Handle(CalendarItemCycleEditedEvent @event)
         {
             var cycle = Cycles.FirstOrDefault(c => c.StartDate.DayOfWeek == @event.StartDate.DayOfWeek);
             Cycles.Remove(cycle);
@@ -98,7 +99,7 @@ namespace AwesomeCalendar.Domain.Aggregates
             Cycles.Add(cycle);
         }
 
-        public void Handle(CycleExclusionCreatedEvent @event)
+        void IHandle<CycleExclusionCreatedEvent>.Handle(CycleExclusionCreatedEvent @event)
         {
             var cycle = Cycles.FirstOrDefault(c => c.StartDate.DayOfWeek == @event.StartDate.DayOfWeek);
 
@@ -109,90 +110,6 @@ namespace AwesomeCalendar.Domain.Aggregates
                 StartDate = @event.StartDate,
                 EndDate = @event.EndDate
             ));
-        }
-
-        private void EditSingleItem(string name, string description, DateTime startDate, DateTime endDate)
-        {
-            ApplyChange(new CycleExclusionCreatedEvent
-            {
-                AggregateId = Id,
-                Name = name,
-                Description = description,
-                StartDate = startDate,
-                EndDate = endDate
-            });
-        }
-
-        private void EditCurrentAndFutureItems(string userId, string name, string description, DateTime startDate,
-            DateTime endDate, List<Contracts.Commands.CalendarItemCycle> cycles)
-        {
-            var aggragateId = Guid.NewGuid();
-
-            ApplyChange(new CalendarItemCreatedEvent{
-                AggregateId = aggragateId,
-                UserId = userId,
-                Name = name,
-                Description = description,
-                StartDate = startDate,
-                EndDate = endDate
-            });
-
-            foreach (var cycle in Cycles)
-            {
-                var currentCycle = cycles.ToList().FirstOrDefault(c => c.StartDate.DayOfWeek == cycle.StartDate.DayOfWeek);
-
-                ApplyChange(new CalendarItemCycleEditedEvent
-                {
-                    AggregateId = Id,
-                    Type = cycle.Type,
-                    Interval = cycle.Interval,
-                    StartDate = cycle.StartDate,
-                    EndDate = DateTime.UtcNow
-                });
-
-                if (currentCycle != null)
-                {
-                    ApplyChange(new CalendarItemCycleCreatedEvent()
-                    {
-                        AggregateId = aggragateId,
-                        Type = currentCycle.Type,
-                        Interval = currentCycle.Interval,
-                        StartDate = currentCycle.StartDate,
-                        EndDate = currentCycle.EndDate
-                    });
-                }
-            }
-        }
-
-        private void EditAllItems(string name, string description, DateTime startDate, DateTime endDate, List<Contracts.Commands.CalendarItemCycle> cycles)
-        {
-            ApplyChange(new CalendarItemEditedEvent()
-            {
-                AggregateId = Id,
-                Name = name,
-                Description = description,
-                StartDate = startDate,
-                EndDate = endDate
-            });
-
-            foreach (var cycle in Cycles)
-            {
-                var currentCycle = cycles.ToList().FirstOrDefault(c => c.StartDate.DayOfWeek == cycle.StartDate.DayOfWeek);
-
-                if (currentCycle == null)
-                {
-                    //delete
-                }
-                else
-                    ApplyChange(new CalendarItemCycleCreatedEvent()
-                    {
-                        AggregateId = Id,
-                        Type = currentCycle.Type,
-                        Interval = currentCycle.Interval,
-                        StartDate = currentCycle.StartDate,
-                        EndDate = currentCycle.EndDate
-                    });
-            }
         }
     }
 }
