@@ -7,6 +7,7 @@
         InvalidCommand,
         InvalidEvent,
         EventStoreConcurency,
-        AggregateNotFound
+        AggregateNotFound,
+        AggregateDeleted
     }
 }

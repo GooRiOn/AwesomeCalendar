@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Infrastructure.Enums;
+using AwesomeCalendar.Infrastructure.Exceptions;
+using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 
@@ -13,6 +15,7 @@ namespace AwesomeCalendar.Domain.Aggregates
         IHandle<CalendarItemCycleCreatedEvent>,
         IHandle<CalendarItemEditedEvent>,
         IHandle<CalendarItemCycleEditedEvent>,
+        IHandle<CalendarItemDeletedEvent>,
         IHandle<CycleExclusionCreatedEvent>
     {
         public string UserId { get; private set; }
@@ -65,6 +68,11 @@ namespace AwesomeCalendar.Domain.Aggregates
             throw new NotImplementedException();
         }
 
+        public void Delete()
+        {
+            ApplyChange(new CalendarItemDeletedEvent {AggregateId = Id});
+        }
+
         void IHandle<CalendarItemCreatedEvent>.Handle(CalendarItemCreatedEvent @event)
         {
             Id = @event.AggregateId;
@@ -97,6 +105,11 @@ namespace AwesomeCalendar.Domain.Aggregates
             cycle.Interval = @event.Interval;
 
             Cycles.Add(cycle);
+        }
+
+        void IHandle<CalendarItemDeletedEvent>.Handle(CalendarItemDeletedEvent @event)
+        {
+            throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateDeleted, typeof(CalendarItem));
         }
 
         void IHandle<CycleExclusionCreatedEvent>.Handle(CycleExclusionCreatedEvent @event)

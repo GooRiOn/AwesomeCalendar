@@ -36,6 +36,7 @@ namespace AwesomeCalendar.Tests.CommandHandlers
         [Theory, AutoData]
         public void persists_event_to_event_store_needed_to_reconstruct_calendar_item(CreateCalendarItemCommand createCommand, DeleteCalendarItemCommand deleteCommand)
         {
+            createCommand.EndDate = createCommand.StartDate.AddDays(1);
             CreateCommandHandler.Handle(createCommand);
 
             deleteCommand.Id = createCommand.Id;
@@ -48,7 +49,7 @@ namespace AwesomeCalendar.Tests.CommandHandlers
         }
 
         [Fact]
-        public void thors_when_command_is_null()
+        public void throws_when_command_is_null()
         {
             var exception = Record.Exception(() => act(null));
 
@@ -65,6 +66,17 @@ namespace AwesomeCalendar.Tests.CommandHandlers
 
             exception.ShouldBeOfType(typeof(AwesomeCalendarException));
             Assert.Equal(((AwesomeCalendarException)exception).Type, AwesomeCalendarExceptionType.InvalidCommand);
+        }
+
+        [Theory, AutoData]
+        public void throws_when_command_not_found(CreateCalendarItemCommand createCommand, DeleteCalendarItemCommand deleteCommand)
+        {
+            createCommand.EndDate = createCommand.StartDate.AddDays(1);
+            CreateCommandHandler.Handle(createCommand);
+
+            var exception = Record.Exception(() => act(deleteCommand));
+
+            exception.ShouldBeOfType(typeof(AwesomeCalendarException));
         }
     }
 }
