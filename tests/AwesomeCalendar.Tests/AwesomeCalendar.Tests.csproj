@@ -76,7 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregates\calendar_item_tests.cs" />
+    <Compile Include="Aggregates\calendar_item_creation_tests.cs" />
     <Compile Include="CommandHandlers\create_calendar_item_command_handler_tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

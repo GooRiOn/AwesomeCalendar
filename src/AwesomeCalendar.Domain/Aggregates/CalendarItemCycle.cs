@@ -4,7 +4,7 @@ using AwesomeCalendar.Infrastructure.Enums;
 
 namespace AwesomeCalendar.Domain.Aggregates
 {
-    class CalendarItemCycle
+    public class CalendarItemCycle
     {
         public DateTime StartDate { get; set; }
 
