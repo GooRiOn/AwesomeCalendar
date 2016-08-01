@@ -7,10 +7,6 @@ namespace AwesomeCalendar.DataAccess
     {
         public DbSet<CalendarItemBaseEvent> CalendarItemEvents { get; set; }
 
-        public DbSet<CalendarItemCreatedEvent> CalendarItemCreatedEvents { get; set; }
-
-        public DbSet<CalendarItemCycleCreatedEvent> CalendarItemCycleCreatedEvents { get; set; }
-
         static EventStoreContext()
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EventStoreContext>());

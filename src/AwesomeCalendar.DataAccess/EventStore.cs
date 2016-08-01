@@ -45,7 +45,7 @@ namespace AwesomeCalendar.DataAccess
             where TEvent : class, IEvent
             
         {
-            var events = Context.Set<TEvent>().Where(e => e.AggregateId == id).AsNoTracking().ToList();
+            var events = Context.Set<TEvent>().Where(e => e.AggregateId == id).AsNoTracking().OrderBy(e => e.CreatedDate).ToList();
 
             var aggragate = new TAggregate();
             aggragate.LoadFromHistory(events);
