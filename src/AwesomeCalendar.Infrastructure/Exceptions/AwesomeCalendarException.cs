@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Threading;
+using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Enums;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Infrastructure.Exceptions
 {

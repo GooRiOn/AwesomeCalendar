@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Interfaces.Busses;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
-using AwesomeCalendar.Infrastructure.Interfaces.Executors;
+using AwesomeCalendar.Infrastructure.Interfaces.HandleResult;
 using EasyNetQ;
 
 namespace AwesomeCalendar.Messaging.Busses
@@ -10,32 +9,21 @@ namespace AwesomeCalendar.Messaging.Busses
     public class CommandBus : ICommandBus
     {
         IBus Bus { get; }
-        ICommandHandlerExecutor CommandHandlerExecutor { get; }
+        ICommandBusExecutor CommandBusExecutor { get; }
 
-        public CommandBus(ICommandHandlerExecutor commandHandlerExecutor)
+        public CommandBus(ICommandBusExecutor commandBusExecutor)
         {
-            CommandHandlerExecutor = commandHandlerExecutor;
+            CommandBusExecutor = commandBusExecutor;
 
             Bus = RabbitHutch.CreateBus("host=localhost");
-            Bus.Receive(nameof(CommandBus), (ICommand command) => ProccessBus(command));
+            Bus.Respond<ICommand, IHandleResult>(commandBusExecutor.Execute);
         }
 
-        public void Send<TCommand>(TCommand command) where TCommand : class, ICommand =>
-            Bus.Send(nameof(CommandBus),command);
+        public IHandleResult Send<TCommand>(TCommand command) where TCommand : class, ICommand =>
+            Bus.Request<ICommand, IHandleResult>(command);
 
 
-        public async Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand =>
-            await Bus.SendAsync(nameof(CommandBus), command);
-
-
-        void ProccessBus(ICommand command) 
-        {
-            var commandType = command.GetType();
-            var executorType = CommandHandlerExecutor.GetType();
-
-            executorType.GetMethod(nameof(ICommandHandlerExecutor.Execute))
-                .MakeGenericMethod(commandType)
-                .Invoke(CommandHandlerExecutor, new[] { command });
-        }
+        public async Task<IHandleResult> SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand =>
+            await Bus.RequestAsync<ICommand, IHandleResult>(command);
     }
 }

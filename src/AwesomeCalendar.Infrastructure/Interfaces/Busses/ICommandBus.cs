@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
+using AwesomeCalendar.Infrastructure.Interfaces.HandleResult;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Busses
 {
     public interface ICommandBus
     {
-        void Send<TCommand>(TCommand command) where TCommand : class, ICommand;
-        Task SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand;
+        IHandleResult Send<TCommand>(TCommand command) where TCommand : class, ICommand;
+        Task<IHandleResult> SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand;
     }
 }
