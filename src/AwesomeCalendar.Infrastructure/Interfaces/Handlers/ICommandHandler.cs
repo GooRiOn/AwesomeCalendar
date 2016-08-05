@@ -1,10 +1,11 @@
-﻿using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
+﻿using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Handlers
 {
     public interface ICommandHandler<in TCommand> where TCommand : class, ICommand
     {
-        void Handle(TCommand command);
+        Task HandleAsync(TCommand command);
         void Validate(TCommand command);
     }
 }

@@ -1,4 +1,5 @@
-﻿using AwesomeCalendar.Infrastructure.Interfaces.Busses;
+﻿using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.Interfaces.Busses;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using AwesomeCalendar.Infrastructure.Interfaces.Executors;
 using AwesomeCalendar.Infrastructure.Interfaces.HandleResult;
@@ -15,12 +16,12 @@ namespace AwesomeCalendar.Messaging.Executors
             CommandHandlerExecutor = commandHandlerExecutor;
         }
 
-        public IHandleResult Execute(ICommand command)
+        public async Task<IHandleResult> ExecuteAsync(ICommand command)
         {
             var commandType = command.GetType();
             var executorType = CommandHandlerExecutor.GetType();
 
-            executorType.GetMethod(nameof(ICommandHandlerExecutor.Execute))
+            await (Task) executorType.GetMethod(nameof(ICommandHandlerExecutor.ExecuteAsync))
                 .MakeGenericMethod(commandType)
                 .Invoke(CommandHandlerExecutor, new[] { command });
 

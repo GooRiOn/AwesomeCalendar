@@ -65,6 +65,7 @@
     <Compile Include="Busses\EventBus.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="Executors\CommandBusExecutor.cs" />
+    <Compile Include="Executors\EventBusExecutor.cs" />
     <Compile Include="HandlingResult\HandleResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

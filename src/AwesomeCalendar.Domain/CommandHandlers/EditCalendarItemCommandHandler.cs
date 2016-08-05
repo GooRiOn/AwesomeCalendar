@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Domain.Aggregates;
@@ -19,9 +20,9 @@ namespace AwesomeCalendar.Domain.CommandHandlers
             EventStore = eventStore;
         }
 
-        public void Handle(EditCalendarItemCommand command)
+        public async Task HandleAsync(EditCalendarItemCommand command)
         {
-            var calendarItem = EventStore.GetById<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var calendarItem = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
 
             calendarItem.Edit(
                 command.UserId,
@@ -32,7 +33,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
                 command.EndDate,
                 command.Cycles.ToList());
 
-            EventStore.Persist(calendarItem);
+            await EventStore.PersistAsync(calendarItem);
         }
 
         public void Validate(EditCalendarItemCommand command)

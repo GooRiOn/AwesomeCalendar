@@ -1,9 +1,10 @@
-﻿using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
+﻿using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Handlers
 {
     public interface IEventHandler<in TEvent> where TEvent : class, IEvent
     {
-        void Handle(TEvent @event);
+        Task HandleAsync(TEvent @event);
     }
 }

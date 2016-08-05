@@ -1,4 +1,5 @@
-﻿using AwesomeCalendar.Contracts.Events;
+﻿using System.Threading.Tasks;
+using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 using AwesomeCalendar.ReadSide.Entities;
 using AwesomeCalendar.ReadSide.Repositories.Interfaces;
@@ -14,9 +15,8 @@ namespace AwesomeCalendar.Domain.EventHandlers
             CalendarItemCycleRepository = calendarItemCycleRepository;
         }
 
-        public void Handle(CalendarItemCycleCreatedEvent @event)
-        {
-            CalendarItemCycleRepository.Add(new CalendarItemCycleEntity
+        public async Task HandleAsync(CalendarItemCycleCreatedEvent @event) =>
+            await CalendarItemCycleRepository.AddAsync(new CalendarItemCycleEntity
             {
                 CalendarItemId = @event.AggregateId,
                 Type = @event.Type,
@@ -24,6 +24,6 @@ namespace AwesomeCalendar.Domain.EventHandlers
                 StartDate = @event.StartDate,
                 EndDate = @event.EndDate
             });
-        }
+        
     }
 }

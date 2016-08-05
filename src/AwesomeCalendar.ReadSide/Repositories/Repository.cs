@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Interfaces.ReadSide;
 
 namespace AwesomeCalendar.ReadSide.Repositories
@@ -16,19 +17,19 @@ namespace AwesomeCalendar.ReadSide.Repositories
             Context = readSideContext;
         }
 
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
-        public void Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
-        public void SoftDelete(TEntity entity)
+        public async Task SoftDeleteAsync(TEntity entity)
         {
             var softDeletableEntity = entity as ISoftDeletable;
 
@@ -36,17 +37,17 @@ namespace AwesomeCalendar.ReadSide.Repositories
                 throw new InvalidOperationException("Entity is not soft deletable");
 
             softDeletableEntity.SoftDelete();
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
-        public void SoftDelete(Guid id)
+        public async Task SoftDeleteAsync(Guid id)
         {
             var entity = Query.FirstOrDefault(e => e.Id == id);
 
             if(entity == null)
                 throw new ArgumentException("Entity does not exist");
 
-            SoftDelete(entity);
+            await SoftDeleteAsync(entity);
         }
     }
 }

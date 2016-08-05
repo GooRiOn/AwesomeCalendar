@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.DataAccess;
@@ -27,28 +28,28 @@ namespace AwesomeCalendar.Tests.CommandHandlers
             CommandHandler = new CreateCalendarItemCommandHandler(EventStore);
         }
 
-        void act(CreateCalendarItemCommand command)
+        async Task act(CreateCalendarItemCommand command)
         {
-            CommandHandler.Handle(command);
+            await CommandHandler.HandleAsync(command);
         }
 
         [Theory, AutoData]
-        public void persists_event_to_event_store_needed_to_reconstruct_calendar_item(CreateCalendarItemCommand command)
+        public async Task persists_event_to_event_store_needed_to_reconstruct_calendar_item(CreateCalendarItemCommand command)
         {
             command.StartDate = DateTime.UtcNow;
             command.EndDate = DateTime.UtcNow.AddHours(1);
 
-            act(command);
-            var createdAggreagte = EventStore.GetById<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            await act(command);
+            var createdAggreagte = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
 
             createdAggreagte.ShouldBeOfType(typeof(CalendarItem));
             Assert.Equal(command.Id, createdAggreagte.Id); 
         }
 
         [Fact]
-        public void throws_when_command_is_null()
+        public async Task throws_when_command_is_null()
         {
-            var exception = Record.Exception(() => act(null));
+            var exception = await Record.ExceptionAsync(async ()=> await act(null));
 
             exception.ShouldBeOfType(typeof(AwesomeCalendarException));
             Assert.Equal(((AwesomeCalendarException)exception).Type,AwesomeCalendarExceptionType.NullCommand);
@@ -58,7 +59,7 @@ namespace AwesomeCalendar.Tests.CommandHandlers
         [InlineData("","name", "2016-12-12", "2016-12-23")]
         [InlineData("userId", "", "2016-12-12", "2016-12-23")]
         [InlineData("userId", "name", "2016-12-12", "2016-12-11")]
-        public void throws_when_command_has_invalid_data(string userId, string name, DateTime startDate, DateTime endDate)
+        public async Task throws_when_command_has_invalid_data(string userId, string name, DateTime startDate, DateTime endDate)
         {
             var command = new CreateCalendarItemCommand
             {
@@ -68,7 +69,7 @@ namespace AwesomeCalendar.Tests.CommandHandlers
                 EndDate = endDate
             };
 
-            var exception = Record.Exception(() => act(command));
+            var exception = await Record.ExceptionAsync(async () => await act(command));
 
             exception.ShouldBeOfType(typeof(AwesomeCalendarException));
             Assert.Equal(((AwesomeCalendarException)exception).Type, AwesomeCalendarExceptionType.InvalidCommand);
