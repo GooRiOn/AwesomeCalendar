@@ -24,7 +24,7 @@ namespace AwesomeCalendar.Web.Controllers
         [HttpPost, Route("Send")]
         public void Send()
         {
-            var test = CommandBus.Send(new CreateCalendarItemCommand
+            var result = CommandBus.Send(new CreateCalendarItemCommand
             {
                 Description = "Test",
                 //Name = "Test",

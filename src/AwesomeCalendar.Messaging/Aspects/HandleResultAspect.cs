@@ -1,4 +1,5 @@
 ﻿using System;
+using AwesomeCalendar.Infrastructure.Exceptions;
 using AwesomeCalendar.Messaging.HandlingResult;
 using Castle.DynamicProxy;
 
@@ -12,7 +13,7 @@ namespace AwesomeCalendar.Messaging.Aspects
             {
                 invocation.Proceed();
             }
-            catch (Exception exception)
+            catch (Exception exception) when((exception.InnerException as AwesomeCalendarException) != null)
             {
 
                 invocation.ReturnValue = new HandleResult(false);
