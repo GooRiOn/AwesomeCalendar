@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Busses;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
@@ -19,7 +20,7 @@ namespace AwesomeCalendar.DataAccess
             EventBus = eventBus;
         }
 
-        public void Persist<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregateRoot
+        public async Task PersistAsync<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregateRoot
         {
             var events = aggregate.GetUncommittedEvents();
 
@@ -34,18 +35,18 @@ namespace AwesomeCalendar.DataAccess
                 dbSet.GetType().GetMethod("Add").Invoke(dbSet, new[] { @event });
             }
 
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
 
             foreach (var @event in events)
-                EventBus.Send(@event);
+                await EventBus.SendAsync(@event);
         }
 
-        public TAggregate GetById<TAggregate,TEvent>(Guid id) 
+        public async Task<TAggregate> GetByIdAsync<TAggregate,TEvent>(Guid id) 
             where TAggregate : IAggregateRoot, new()
             where TEvent : class, IEvent
             
         {
-            var events = Context.Set<TEvent>().Where(e => e.AggregateId == id).AsNoTracking().OrderBy(e => e.CreatedDate).ToList();
+            var events = await Context.Set<TEvent>().Where(e => e.AggregateId == id).AsNoTracking().OrderBy(e => e.CreatedDate).ToListAsync();
 
             var aggragate = new TAggregate();
             aggragate.LoadFromHistory(events);

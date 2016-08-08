@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\Busses\ICommandBus.cs" />
     <Compile Include="Interfaces\Busses\ICommandBusExecutor.cs" />
     <Compile Include="Interfaces\Busses\IEventBus.cs" />
+    <Compile Include="Interfaces\Busses\IEventBusExecutor.cs" />
     <Compile Include="Interfaces\Contracts\ICommand.cs" />
     <Compile Include="Interfaces\Contracts\IEvent.cs" />
     <Compile Include="Interfaces\Contracts\IHandle.cs" />

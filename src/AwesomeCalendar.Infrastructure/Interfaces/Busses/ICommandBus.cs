@@ -6,7 +6,6 @@ namespace AwesomeCalendar.Infrastructure.Interfaces.Busses
 {
     public interface ICommandBus
     {
-        IHandleResult Send<TCommand>(TCommand command) where TCommand : class, ICommand;
         Task<IHandleResult> SendAsync<TCommand>(TCommand command) where TCommand : class, ICommand;
     }
 }

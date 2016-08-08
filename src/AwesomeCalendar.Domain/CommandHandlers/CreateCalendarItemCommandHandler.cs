@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.Domain.Aggregates;
 using AwesomeCalendar.Infrastructure.Enums;
@@ -17,12 +18,12 @@ namespace AwesomeCalendar.Domain.CommandHandlers
             EventStore = eventStore;
         }
 
-        public void Handle(CreateCalendarItemCommand command)
+        public async Task HandleAsync(CreateCalendarItemCommand command)
         {
             ((ICommandHandler<CreateCalendarItemCommand>) this).Validate(command);
 
             var calendarItem = new CalendarItem(command.Id, command.UserId, command.Name,command.Description,command.StartDate,command.EndDate,command.Cycles);
-            EventStore.Persist(calendarItem);
+            await EventStore.PersistAsync(calendarItem);
         }
 
         void ICommandHandler<CreateCalendarItemCommand>.Validate(CreateCalendarItemCommand command)

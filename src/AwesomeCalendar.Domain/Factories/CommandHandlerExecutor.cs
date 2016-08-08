@@ -1,4 +1,5 @@
-﻿using AwesomeCalendar.Infrastructure.DependencyInjection.Interfaces;
+﻿using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.DependencyInjection.Interfaces;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using AwesomeCalendar.Infrastructure.Interfaces.Executors;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
@@ -14,8 +15,8 @@ namespace AwesomeCalendar.Domain.Factories
             CustomDependencyResolver = customDependencyResolver;
         }
 
-        public void Execute<TCommand>(TCommand command) where TCommand : class, ICommand
-            => CustomDependencyResolver.Resolve<ICommandHandler<TCommand>>()
-                .Handle(command);
+        public async Task ExecuteAsync<TCommand>(TCommand command) where TCommand : class, ICommand
+            => await CustomDependencyResolver.Resolve<ICommandHandler<TCommand>>()
+                .HandleAsync(command);
     }
 }

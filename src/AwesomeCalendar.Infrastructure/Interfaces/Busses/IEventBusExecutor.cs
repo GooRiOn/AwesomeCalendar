@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
-using AwesomeCalendar.Infrastructure.Interfaces.HandleResult;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Busses
 {
-    public interface ICommandBusExecutor
+    public interface IEventBusExecutor
     {
-        Task<IHandleResult> ExecuteAsync(ICommand command);
+        void ExecuteAsync(IEvent @event);
     }
 }

@@ -1,9 +1,10 @@
-﻿using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
+﻿using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.Executors
 {
     public interface ICommandHandlerExecutor
     {
-        void Execute<TCommand>(TCommand command) where TCommand : class, ICommand;
+        Task ExecuteAsync<TCommand>(TCommand command) where TCommand : class, ICommand;
     }
 }

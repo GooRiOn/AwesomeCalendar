@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace AwesomeCalendar.Infrastructure.Interfaces.ReadSide
 {
     public interface IRepository<in TEntity> where TEntity : class, IInternalEntity
     {
-        void Add(TEntity entity);
+        Task AddAsync(TEntity entity);
 
-        void Update(TEntity entity);
-
-        void SoftDelete(TEntity entity);
-
-        void SoftDelete(Guid id);
+        Task UpdateAsync(TEntity entity);
+        
+        Task SoftDeleteAsync(TEntity entity);
+        
+        Task SoftDeleteAsync(Guid id);
     }
 }

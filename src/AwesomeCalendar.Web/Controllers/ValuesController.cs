@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.Infrastructure.Enums;
@@ -22,9 +23,9 @@ namespace AwesomeCalendar.Web.Controllers
         }
 
         [HttpPost, Route("Send")]
-        public void Send()
+        public async Task Send()
         {
-            var result = CommandBus.Send(new CreateCalendarItemCommand
+            var result = await CommandBus.SendAsync(new CreateCalendarItemCommand
             {
                 Description = "Test",
                 //Name = "Test",
