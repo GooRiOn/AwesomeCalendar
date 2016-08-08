@@ -4,7 +4,6 @@ using System.Linq;
 using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;
-using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 
@@ -68,10 +67,9 @@ namespace AwesomeCalendar.Domain.Aggregates
             throw new NotImplementedException();
         }
 
-        public void Delete()
-        {
-            ApplyChange(new CalendarItemDeletedEvent {AggregateId = Id});
-        }
+        public void Delete() => 
+            Events.Add(new CalendarItemDeletedEvent {AggregateId = Id}); // not sure about that
+        
 
         void IHandle<CalendarItemCreatedEvent>.Handle(CalendarItemCreatedEvent @event)
         {

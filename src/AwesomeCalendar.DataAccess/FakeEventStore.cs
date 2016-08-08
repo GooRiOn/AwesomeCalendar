@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.Enums;
+using AwesomeCalendar.Infrastructure.Exceptions;
 using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
@@ -23,6 +25,10 @@ namespace AwesomeCalendar.DataAccess
         public async Task<TAggregate> GetByIdAsync<TAggregate, TEvent>(Guid id) where TAggregate : IAggregateRoot, new() where TEvent : class, IEvent
         {
             var events = EventStore.Where(e => e.AggregateId == id).ToList();
+
+            if (!events.Any())
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateNotFound, typeof(TAggregate));
+
             var aggreagte = new TAggregate();
 
             aggreagte.LoadFromHistory(events);

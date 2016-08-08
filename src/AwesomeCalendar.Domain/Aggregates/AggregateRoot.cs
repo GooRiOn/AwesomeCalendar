@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 

@@ -2,6 +2,8 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using AwesomeCalendar.Infrastructure.Enums;
+using AwesomeCalendar.Infrastructure.Exceptions;
 using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Busses;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
@@ -47,6 +49,9 @@ namespace AwesomeCalendar.DataAccess
             
         {
             var events = await Context.Set<TEvent>().Where(e => e.AggregateId == id).AsNoTracking().OrderBy(e => e.CreatedDate).ToListAsync();
+
+            if(!events.Any()) 
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateNotFound, typeof(TAggregate));
 
             var aggragate = new TAggregate();
             aggragate.LoadFromHistory(events);

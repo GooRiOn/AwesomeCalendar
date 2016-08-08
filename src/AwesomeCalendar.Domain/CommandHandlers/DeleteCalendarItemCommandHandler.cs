@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.Contracts.Events;
@@ -22,15 +19,15 @@ namespace AwesomeCalendar.Domain.CommandHandlers
             EventStore = eventStore;
         }
 
-        public void Handle(DeleteCalendarItemCommand command)
+        public async Task HandleAsync(DeleteCalendarItemCommand command)
         {
             ((ICommandHandler<DeleteCalendarItemCommand>) this).Validate(command);
 
-            var calendarItem = EventStore.GetById<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var calendarItem = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
 
             calendarItem.Delete();
 
-            EventStore.Persist(calendarItem);
+            await EventStore.PersistAsync(calendarItem);
         }
 
         void ICommandHandler<DeleteCalendarItemCommand>.Validate(DeleteCalendarItemCommand command)

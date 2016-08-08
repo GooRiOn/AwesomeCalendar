@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Infrastructure.Interfaces.Handlers;
 using AwesomeCalendar.ReadSide.Repositories.Interfaces;
@@ -17,10 +13,8 @@ namespace AwesomeCalendar.Domain.EventHandlers
         {
             CalendarItemRepository = calendarItemRepository;
         }
-
-        public void Handle(CalendarItemDeletedEvent @event)
-        {
-            CalendarItemRepository.SoftDelete(@event.AggregateId);
-        }
+       
+        public async Task HandleAsync(CalendarItemDeletedEvent @event) =>
+               await CalendarItemRepository.SoftDeleteAsync(@event.AggregateId);
     }
 }
