@@ -1,6 +1,5 @@
 ﻿using System;
 using AwesomeCalendar.Infrastructure.Enums;
-using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Contracts.Events
 {

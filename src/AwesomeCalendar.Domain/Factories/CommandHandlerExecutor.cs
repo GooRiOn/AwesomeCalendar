@@ -14,7 +14,8 @@ namespace AwesomeCalendar.Domain.Factories
             CustomDependencyResolver = customDependencyResolver;
         }
 
-        public void Execute<TCommand>(TCommand command) where TCommand : class, ICommand 
-            => CustomDependencyResolver.Resolve<ICommandHandler<TCommand>>().Handle(command);
+        public void Execute<TCommand>(TCommand command) where TCommand : class, ICommand
+            => CustomDependencyResolver.Resolve<ICommandHandler<TCommand>>()
+                .Handle(command);
     }
 }

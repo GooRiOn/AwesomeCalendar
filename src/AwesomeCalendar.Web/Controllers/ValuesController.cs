@@ -24,10 +24,10 @@ namespace AwesomeCalendar.Web.Controllers
         [HttpPost, Route("Send")]
         public void Send()
         {
-            CommandBus.Send(new CreateCalendarItemCommand
+            var result = CommandBus.Send(new CreateCalendarItemCommand
             {
                 Description = "Test",
-                Name = "Test",
+                //Name = "Test",
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(1),
                 UserId = Guid.NewGuid().ToString(),
