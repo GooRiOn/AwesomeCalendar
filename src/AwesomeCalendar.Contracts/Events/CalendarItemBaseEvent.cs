@@ -11,7 +11,7 @@ namespace AwesomeCalendar.Contracts.Events
 
         public DateTime CreatedDate { get; }
 
-        public DateTime StartDate { get; set; }
+        public int Version { get; set; }
 
         protected CalendarItemBaseEvent()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Enums;
@@ -10,7 +11,7 @@ using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
 namespace AwesomeCalendar.DataAccess
 {
-    public class FakeEventStore : IEventStore
+    public class FakeEventStore<TBaseEvent> : IEventStore<TBaseEvent> where TBaseEvent : class, IEvent
     {
         private ICollection<IEvent> EventStore { get; } = new List<IEvent>();
 
@@ -22,7 +23,7 @@ namespace AwesomeCalendar.DataAccess
                 EventStore.Add(@event);
         }
 
-        public async Task<TAggregate> GetByIdAsync<TAggregate, TEvent>(Guid id) where TAggregate : IAggregateRoot, new() where TEvent : class, IEvent
+        public async Task<TAggregate> GetByIdAsync<TAggregate>(Guid id) where TAggregate : IAggregateRoot, new()
         {
             var events = EventStore.Where(e => e.AggregateId == id).ToList();
 

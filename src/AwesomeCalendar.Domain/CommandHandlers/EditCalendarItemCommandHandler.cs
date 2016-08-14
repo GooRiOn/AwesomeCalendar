@@ -13,16 +13,16 @@ namespace AwesomeCalendar.Domain.CommandHandlers
 {
     public class EditCalendarItemCommandHandler : ICommandHandler<EditCalendarItemCommand>
     {
-        IEventStore EventStore { get; set; }
+        IEventStore<CalendarItemBaseEvent> EventStore { get; set; }
 
-        public EditCalendarItemCommandHandler(IEventStore eventStore)
+        public EditCalendarItemCommandHandler(IEventStore<CalendarItemBaseEvent> eventStore)
         {
             EventStore = eventStore;
         }
 
         public async Task HandleAsync(EditCalendarItemCommand command)
         {
-            var calendarItem = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var calendarItem = await EventStore.GetByIdAsync<CalendarItem>(command.Id);
 
             calendarItem.Edit(
                 command.UserId,

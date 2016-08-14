@@ -6,5 +6,6 @@ namespace AwesomeCalendar.Infrastructure.Interfaces.Contracts
     {
         Guid AggregateId { get; }
         DateTime CreatedDate { get; }
+        int Version { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
+using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Domain.Aggregates;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;
@@ -11,9 +12,9 @@ namespace AwesomeCalendar.Domain.CommandHandlers
 {
     public class CreateCalendarItemCommandHandler : ICommandHandler<CreateCalendarItemCommand>
     {
-        IEventStore EventStore { get; }
+        IEventStore<CalendarItemBaseEvent> EventStore { get; }
 
-        public CreateCalendarItemCommandHandler(IEventStore eventStore)
+        public CreateCalendarItemCommandHandler(IEventStore<CalendarItemBaseEvent> eventStore)
         {
             EventStore = eventStore;
         }

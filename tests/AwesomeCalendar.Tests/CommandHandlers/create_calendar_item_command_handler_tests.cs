@@ -20,11 +20,11 @@ namespace AwesomeCalendar.Tests.CommandHandlers
     public class create_calendar_item_command_handler_tests
     {
         ICommandHandler<CreateCalendarItemCommand> CommandHandler { get; }
-        IEventStore EventStore { get; }
+        IEventStore<CalendarItemBaseEvent> EventStore { get; }
 
         public create_calendar_item_command_handler_tests()
         {
-            EventStore = new FakeEventStore();
+            EventStore = new FakeEventStore<CalendarItemBaseEvent>();
             CommandHandler = new CreateCalendarItemCommandHandler(EventStore);
         }
 
@@ -40,7 +40,7 @@ namespace AwesomeCalendar.Tests.CommandHandlers
             command.EndDate = DateTime.UtcNow.AddHours(1);
 
             await act(command);
-            var createdAggreagte = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var createdAggreagte = await EventStore.GetByIdAsync<CalendarItem>(command.Id);
 
             createdAggreagte.ShouldBeOfType(typeof(CalendarItem));
             Assert.Equal(command.Id, createdAggreagte.Id); 

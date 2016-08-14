@@ -18,13 +18,13 @@ namespace AwesomeCalendar.Tests.CommandHandlers
 {
     public class delete_calendar_item_command_handler_tests
     {
-        IEventStore EventStore { get; }
+        IEventStore<CalendarItemBaseEvent> EventStore { get; }
         ICommandHandler<CreateCalendarItemCommand> CreateCommandHandler { get; }
         ICommandHandler<DeleteCalendarItemCommand> DeleteCommandHandler { get; }
 
         public delete_calendar_item_command_handler_tests()
         {
-            EventStore = new FakeEventStore();
+            EventStore = new FakeEventStore<CalendarItemBaseEvent>();
             CreateCommandHandler = new CreateCalendarItemCommandHandler(EventStore);
             DeleteCommandHandler = new DeleteCalendarItemCommandHandler(EventStore);
         }
