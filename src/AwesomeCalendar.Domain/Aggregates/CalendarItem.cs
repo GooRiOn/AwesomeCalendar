@@ -15,6 +15,7 @@ namespace AwesomeCalendar.Domain.Aggregates
         IHandle<CalendarItemEditedEvent>,
         IHandle<CalendarItemCycleEditedEvent>,
         IHandle<CalendarItemDeletedEvent>,
+        IHandle<CalendarItemCycleDeletedEvent>,
         IHandle<CycleExclusionCreatedEvent>
     {
         public string UserId { get; private set; }
@@ -69,7 +70,11 @@ namespace AwesomeCalendar.Domain.Aggregates
 
         public void Delete() => 
             Events.Add(new CalendarItemDeletedEvent {AggregateId = Id}); // not sure about that
+
+        public void DeleteCycle(Guid id) =>
+            Events.Add(new CalendarItemCycleDeletedEvent {AggregateId = Id, Id = id});
         
+
 
         void IHandle<CalendarItemCreatedEvent>.Handle(CalendarItemCreatedEvent @event)
         {
@@ -109,7 +114,7 @@ namespace AwesomeCalendar.Domain.Aggregates
         {
             throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateDeleted, typeof(CalendarItem));
         }
-
+        
         void IHandle<CycleExclusionCreatedEvent>.Handle(CycleExclusionCreatedEvent @event)
         {
             var cycle = Cycles.FirstOrDefault(c => c.StartDate.DayOfWeek == @event.StartDate.DayOfWeek);
@@ -121,6 +126,11 @@ namespace AwesomeCalendar.Domain.Aggregates
                 StartDate = @event.StartDate,
                 EndDate = @event.EndDate
             ));
+        }
+
+        void IHandle<CalendarItemCycleDeletedEvent>.Handle(CalendarItemCycleDeletedEvent @event)
+        {
+            throw new NotImplementedException();
         }
     }
 }
