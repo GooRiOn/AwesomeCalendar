@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Linq;
+using Autofac;
+using AwesomeCalendar.ReadSide.Entities;
 using AwesomeCalendar.ReadSide.Repositories;
 using AwesomeCalendar.ReadSide.Repositories.Interfaces;
 
@@ -13,6 +15,8 @@ namespace AwesomeCalendar.ReadSide.DependencyInjection
             containerBuilder.RegisterType<CalendarItemRepository>().As<ICalendarItemRepository>();
 
             containerBuilder.RegisterType<CalendarItemCycleRepository>().As<ICalendarItemCycleRepository>();
+
+            var test = new ReadSideContext().Set<CalendarItemEntity>().Count();
         }
     }
 }

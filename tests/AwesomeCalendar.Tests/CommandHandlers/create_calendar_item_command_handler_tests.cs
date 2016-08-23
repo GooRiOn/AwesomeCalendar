@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
-using AwesomeCalendar.Contracts.Events;
-using AwesomeCalendar.DataAccess;
+using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Domain.Aggregates;
 using AwesomeCalendar.Domain.CommandHandlers;
 using AwesomeCalendar.Infrastructure.Enums;
@@ -40,7 +37,7 @@ namespace AwesomeCalendar.Tests.CommandHandlers
             command.EndDate = DateTime.UtcNow.AddHours(1);
 
             await act(command);
-            var createdAggreagte = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var createdAggreagte = await EventStore.GetByIdAsync<CalendarItem>(command.Id);
 
             createdAggreagte.ShouldBeOfType(typeof(CalendarItem));
             Assert.Equal(command.Id, createdAggreagte.Id); 

@@ -12,7 +12,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
 {
     public class DeleteCalendarItemCommandHandler : ICommandHandler<DeleteCalendarItemCommand>
     {
-        private IEventStore EventStore { get; }
+        IEventStore EventStore { get; }
 
         public DeleteCalendarItemCommandHandler(IEventStore eventStore)
         {
@@ -23,7 +23,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
         {
             ((ICommandHandler<DeleteCalendarItemCommand>) this).Validate(command);
 
-            var calendarItem = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var calendarItem = await EventStore.GetByIdAsync<CalendarItem>(command.Id);
 
             calendarItem.Delete();
 

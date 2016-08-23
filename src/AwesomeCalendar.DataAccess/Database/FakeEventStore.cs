@@ -8,7 +8,7 @@ using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
-namespace AwesomeCalendar.DataAccess
+namespace AwesomeCalendar.DataAccess.Database
 {
     public class FakeEventStore : IEventStore
     {
@@ -22,7 +22,7 @@ namespace AwesomeCalendar.DataAccess
                 EventStore.Add(@event);
         }
 
-        public async Task<TAggregate> GetByIdAsync<TAggregate, TEvent>(Guid id) where TAggregate : IAggregateRoot, new() where TEvent : class, IEvent
+        public async Task<TAggregate> GetByIdAsync<TAggregate>(Guid id) where TAggregate : IAggregateRoot, new()
         {
             var events = EventStore.Where(e => e.AggregateId == id).ToList();
 
