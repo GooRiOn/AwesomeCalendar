@@ -12,9 +12,9 @@ namespace AwesomeCalendar.Domain.CommandHandlers
 {
     public class DeleteCalendarItemCommandHandler : ICommandHandler<DeleteCalendarItemCommand>
     {
-        private IEventStore<CalendarItemBaseEvent> EventStore { get; }
+        IEventStore EventStore { get; }
 
-        public DeleteCalendarItemCommandHandler(IEventStore<CalendarItemBaseEvent> eventStore)
+        public DeleteCalendarItemCommandHandler(IEventStore eventStore)
         {
             EventStore = eventStore;
         }

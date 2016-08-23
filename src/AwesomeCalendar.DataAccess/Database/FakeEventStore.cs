@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Enums;
@@ -9,9 +8,9 @@ using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
-namespace AwesomeCalendar.DataAccess
+namespace AwesomeCalendar.DataAccess.Database
 {
-    public class FakeEventStore<TBaseEvent> : IEventStore<TBaseEvent> where TBaseEvent : class, IEvent
+    public class FakeEventStore : IEventStore
     {
         private ICollection<IEvent> EventStore { get; } = new List<IEvent>();
 

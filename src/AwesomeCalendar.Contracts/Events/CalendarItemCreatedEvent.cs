@@ -1,9 +1,12 @@
 ﻿using System;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Contracts.Events
 {
-    public class CalendarItemCreatedEvent : CalendarItemBaseEvent
+    public class CalendarItemCreatedEvent : IEvent
     {
+        public Guid AggregateId { get; set; }
+
         public string UserId { get; set; }
 
         public string Name { get; set; }

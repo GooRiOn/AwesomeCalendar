@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
-using AwesomeCalendar.Contracts.Events;
-using AwesomeCalendar.DataAccess;
+using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Domain.Aggregates;
 using AwesomeCalendar.Domain.CommandHandlers;
 using AwesomeCalendar.Infrastructure.Enums;
@@ -20,11 +17,11 @@ namespace AwesomeCalendar.Tests.CommandHandlers
     public class create_calendar_item_command_handler_tests
     {
         ICommandHandler<CreateCalendarItemCommand> CommandHandler { get; }
-        IEventStore<CalendarItemBaseEvent> EventStore { get; }
+        IEventStore EventStore { get; }
 
         public create_calendar_item_command_handler_tests()
         {
-            EventStore = new FakeEventStore<CalendarItemBaseEvent>();
+            EventStore = new FakeEventStore();
             CommandHandler = new CreateCalendarItemCommandHandler(EventStore);
         }
 

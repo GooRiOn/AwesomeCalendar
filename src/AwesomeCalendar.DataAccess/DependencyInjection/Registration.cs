@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using Autofac;
-using AwesomeCalendar.Contracts.Events;
+﻿using Autofac;
+using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
 namespace AwesomeCalendar.DataAccess.DependencyInjection
@@ -10,7 +9,7 @@ namespace AwesomeCalendar.DataAccess.DependencyInjection
         public static void Register(ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterType<EventStoreContext>().AsSelf();
-            containerBuilder.RegisterGeneric(typeof(EventStore<>)).As(typeof(IEventStore<>));
+            containerBuilder.RegisterType<EventStore>().As<IEventStore>();
         }
     }
 }

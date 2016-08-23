@@ -2,16 +2,16 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using AwesomeCalendar.DataAccess.Extensions;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;
 using AwesomeCalendar.Infrastructure.Interfaces.Aggragates;
 using AwesomeCalendar.Infrastructure.Interfaces.Busses;
-using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
-namespace AwesomeCalendar.DataAccess
+namespace AwesomeCalendar.DataAccess.Database
 {
-    public class EventStore<TBaseEvent> : IEventStore<TBaseEvent> where TBaseEvent : class, IEvent
+    public class EventStore : IEventStore
     {
         EventStoreContext Context { get; }
         IEventBus EventBus { get; }
@@ -26,7 +26,7 @@ namespace AwesomeCalendar.DataAccess
 
         public async Task PersistAsync<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregateRoot
         {
-            var events = aggregate.GetUncommittedEvents();
+            var eventStoreEntities = aggregate.GetUncommittedEvents().AsEventStoreEntities();
 
             lock (EventStoreLocker)
             {
@@ -35,46 +35,39 @@ namespace AwesomeCalendar.DataAccess
                 if(aggreagteVersion != -1)
                     CheckAggregateVersion(aggregate.Id, aggreagteVersion);
 
-                foreach (var @event in events)
+                foreach (var @event in eventStoreEntities)
                 {
                     @event.Version = ++aggreagteVersion;
-
-                    var eventType = @event.GetType();
-
-                    var genericSetMethod = Context.GetType().GetMethods().First(m => m.Name == "Set" && m.IsGenericMethod);
-
-                    var dbSet = genericSetMethod.MakeGenericMethod(eventType).Invoke(Context, null);
-
-                    dbSet.GetType().GetMethod("Add").Invoke(dbSet, new[] { @event });
+                    Context.Events.Add(@event);
                 }
             }
 
             await Context.SaveChangesAsync();
 
-            foreach (var @event in events)
+            foreach (var @event in aggregate.GetUncommittedEvents())
                 await EventBus.SendAsync(@event);
 
         }
 
         public async Task<TAggregate> GetByIdAsync<TAggregate>(Guid id) where TAggregate : IAggregateRoot, new()
         {
-            var events = await Context.Set<TBaseEvent>().Where(e => e.AggregateId == id).AsNoTracking().OrderBy(e => e.CreatedDate).ToListAsync();
+            var events = await Context.Events.Where(e => e.AggregateId == id).AsNoTracking().OrderBy(e => e.CreatedDate).ToListAsync();
 
             if(!events.Any()) 
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateNotFound, typeof(TAggregate));
 
             var aggragate = new TAggregate();
-            aggragate.LoadFromHistory(events);
+            aggragate.LoadFromHistory(events.AsAggregateEvents());
 
             return aggragate;
         }
 
         private void CheckAggregateVersion(Guid aggreagteId, int expectedVersion)
         {
-            var currentAggreagteVersion = Context.Set<TBaseEvent>().Where(e => e.AggregateId == aggreagteId).Max(e => e.Version);
+            var currentAggreagteVersion = Context.Events.Where(e => e.AggregateId == aggreagteId).Max(e => e.Version);
 
             if(expectedVersion != currentAggreagteVersion)
-                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.EventStoreConcurency, typeof(TBaseEvent));
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.EventStoreConcurency);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AwesomeCalendar.Infrastructure.Exceptions
         public Type SourceType { get; }
         public string Message { get; set; }
 
-        public AwesomeCalendarException(AwesomeCalendarExceptionType type, Type sourceType ,string message = null)
+        public AwesomeCalendarException(AwesomeCalendarExceptionType type, Type sourceType = null ,string message = null)
         {
             Type = type;
             SourceType = sourceType;
