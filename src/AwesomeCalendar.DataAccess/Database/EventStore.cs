@@ -26,7 +26,8 @@ namespace AwesomeCalendar.DataAccess.Database
 
         public async Task PersistAsync<TAggregate>(TAggregate aggregate) where TAggregate : class, IAggregateRoot
         {
-            var eventStoreEntities = aggregate.GetUncommittedEvents().AsEventStoreEntities();
+            var aggregateEvents = aggregate.GetUncommittedEvents();
+            var eventStoreEntities = aggregateEvents.AsEventStoreEntities();
 
             lock (EventStoreLocker)
             {
@@ -44,7 +45,7 @@ namespace AwesomeCalendar.DataAccess.Database
 
             await Context.SaveChangesAsync();
 
-            foreach (var @event in aggregate.GetUncommittedEvents())
+            foreach (var @event in aggregateEvents)
                 await EventBus.SendAsync(@event);
 
         }
@@ -57,7 +58,9 @@ namespace AwesomeCalendar.DataAccess.Database
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateNotFound, typeof(TAggregate));
 
             var aggragate = new TAggregate();
-            aggragate.LoadFromHistory(events.AsAggregateEvents());
+            var aggregateEvents = events.AsAggregateEvents();
+
+            aggragate.LoadFromHistory(aggregateEvents);
 
             return aggragate;
         }

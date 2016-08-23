@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
+using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
@@ -18,7 +18,6 @@ namespace AwesomeCalendar.DataAccess.Extensions
                 Data = Serializer.Serialize(aggregateEvent),
                 Type = aggregateEvent.GetType().ToString()
             });
-        
 
         internal static IEnumerable<IEvent> AsAggregateEvents(this IEnumerable<EventStoreEntity> eventStoreEntities)
         {
@@ -26,9 +25,9 @@ namespace AwesomeCalendar.DataAccess.Extensions
 
             foreach (var entity in eventStoreEntities)
             {
-                var entityType = Type.GetType(entity.Type);
+                var entityType = typeof(CalendarItemCreatedEvent).Assembly.GetType(entity.Type);
 
-                yield return (IEvent) serializerType.GetMethod(nameof(Serializer.Deserialize))
+                yield return (IEvent) serializerType.GetMethod(nameof(Serializer.Deserialize), new[] { typeof(string) })
                     .MakeGenericMethod(entityType)
                     .Invoke(Serializer, new[] {entity.Data});
             }
