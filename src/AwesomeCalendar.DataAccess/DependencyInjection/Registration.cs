@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Infrastructure.Interfaces.DataAccess;
 
 namespace AwesomeCalendar.DataAccess.DependencyInjection

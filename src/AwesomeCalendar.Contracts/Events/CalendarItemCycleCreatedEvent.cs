@@ -1,10 +1,15 @@
 ﻿using System;
 using AwesomeCalendar.Infrastructure.Enums;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 
 namespace AwesomeCalendar.Contracts.Events
 {
-    public class CalendarItemCycleCreatedEvent : CalendarItemBaseEvent
+    public class CalendarItemCycleCreatedEvent : IEvent
     {
+        public Guid AggregateId { get; set; }
+
+        public DateTime StartDate { get; set; }
+
         public DateTime? EndDate { get; set; }
 
         public CalendarItemCycleType Type { get; set; }

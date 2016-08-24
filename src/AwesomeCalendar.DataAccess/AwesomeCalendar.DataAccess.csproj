@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,9 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyInjection\Registration.cs" />
-    <Compile Include="EventStore.cs" />
-    <Compile Include="EventStoreContext.cs" />
-    <Compile Include="FakeEventStore.cs" />
+    <Compile Include="Database\EventStore.cs" />
+    <Compile Include="Database\EventStoreContext.cs" />
+    <Compile Include="Database\EventStoreEntity.cs" />
+    <Compile Include="Database\FakeEventStore.cs" />
+    <Compile Include="Extensions\EventStoreExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

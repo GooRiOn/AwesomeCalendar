@@ -44,7 +44,6 @@
     <Compile Include="Commands\DeleteCalendarItemCommand.cs" />
     <Compile Include="Commands\DeleteCalendarItemCycleCommand.cs" />
     <Compile Include="Commands\EditCalendarItemCommand.cs" />
-    <Compile Include="Events\CalendarItemBaseEvent.cs" />
     <Compile Include="Events\CalendarItemCreatedEvent.cs" />
     <Compile Include="Events\CalendarItemCycleCreatedEvent.cs" />
     <Compile Include="Events\CalendarItemCycleDeletedEvent.cs" />

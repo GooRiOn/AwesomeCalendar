@@ -9,7 +9,7 @@ namespace AwesomeCalendar.Domain.Aggregates
     {
         public Guid Id { get; protected set; }
 
-        public int Version { get; protected set; }
+        public int Version { get; protected set; } = -1;
 
         public List<IEvent> GetUncommittedEvents() => Events;
 

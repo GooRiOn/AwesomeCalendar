@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
-using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Domain.Aggregates;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;
@@ -22,7 +21,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
 
         public async Task HandleAsync(EditCalendarItemCommand command)
         {
-            var calendarItem = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.Id);
+            var calendarItem = await EventStore.GetByIdAsync<CalendarItem>(command.Id);
 
             calendarItem.Edit(
                 command.UserId,

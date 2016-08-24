@@ -28,7 +28,7 @@ namespace AwesomeCalendar.Web.Controllers
             var result = await CommandBus.SendAsync(new CreateCalendarItemCommand
             {
                 Description = "Test",
-                //Name = "Test",
+                Name = "Test",
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(1),
                 UserId = Guid.NewGuid().ToString(),

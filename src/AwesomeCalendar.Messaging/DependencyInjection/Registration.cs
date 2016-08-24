@@ -21,6 +21,8 @@ namespace AwesomeCalendar.Messaging.DependencyInjection
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(HandleResultAspect));
 
+            containerBuilder.RegisterType<EventBusExecutor>().As<IEventBusExecutor>();
+
             containerBuilder.RegisterType<HandleResultAspect>();
         }
     }

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
-using AwesomeCalendar.Contracts.Events;
-using AwesomeCalendar.DataAccess;
-using AwesomeCalendar.Domain.Aggregates;
+using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Domain.CommandHandlers;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;
