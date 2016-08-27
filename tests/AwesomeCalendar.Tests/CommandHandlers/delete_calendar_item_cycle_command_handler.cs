@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
 using AwesomeCalendar.DataAccess;
+using AwesomeCalendar.DataAccess.Database;
 using AwesomeCalendar.Domain.CommandHandlers;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;

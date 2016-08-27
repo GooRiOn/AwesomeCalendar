@@ -1,6 +1,12 @@
-﻿namespace AwesomeCalendar.Contracts.Events
+﻿using System;
+using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
+
+namespace AwesomeCalendar.Contracts.Events
 {
-    public class CalendarItemCycleDeletedEvent : CalendarItemBaseEvent
+    public class CalendarItemCycleDeletedEvent : IEvent
     {
+        public Guid CycleId { get; set; }
+
+        public Guid AggregateId { get; set; }
     }
 }

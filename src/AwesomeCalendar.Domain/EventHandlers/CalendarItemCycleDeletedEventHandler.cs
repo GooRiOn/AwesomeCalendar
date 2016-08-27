@@ -15,9 +15,7 @@ namespace AwesomeCalendar.Domain.EventHandlers
             CalendarItemRepository = calendarItemRepository;
         }
 
-        public Task HandleAsync(CalendarItemCycleDeletedEvent @event)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task HandleAsync(CalendarItemCycleDeletedEvent @event) =>
+               await CalendarItemRepository.SoftDeleteAsync(@event.CycleId);
     }
 }

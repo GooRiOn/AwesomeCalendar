@@ -71,9 +71,12 @@ namespace AwesomeCalendar.Domain.Aggregates
         public void Delete() => 
             Events.Add(new CalendarItemDeletedEvent {AggregateId = Id}); // not sure about that
 
-        public void DeleteCycle(Guid id) =>
-            Events.Add(new CalendarItemCycleDeletedEvent {AggregateId = Id, Id = id});
-        
+        public void DeleteCycle(Guid cycleId)
+        {
+            Events.Add(new CalendarItemCycleDeletedEvent {AggregateId = Id, CycleId = cycleId});
+            Cycles.RemoveAll(c => c.Id == cycleId);
+        }
+
 
 
         void IHandle<CalendarItemCreatedEvent>.Handle(CalendarItemCreatedEvent @event)
@@ -99,7 +102,7 @@ namespace AwesomeCalendar.Domain.Aggregates
 
         void IHandle<CalendarItemCycleEditedEvent>.Handle(CalendarItemCycleEditedEvent @event)
         {
-            var cycle = Cycles.FirstOrDefault(c => c.StartDate.DayOfWeek == @event.StartDate.DayOfWeek);
+            var cycle = Cycles.FirstOrDefault(c => c.Id == @event.CycleId);
             Cycles.Remove(cycle);
 
             cycle.Type = @event.Type;
@@ -114,7 +117,12 @@ namespace AwesomeCalendar.Domain.Aggregates
         {
             throw new AwesomeCalendarException(AwesomeCalendarExceptionType.AggregateDeleted, typeof(CalendarItem));
         }
-        
+
+        void IHandle<CalendarItemCycleDeletedEvent>.Handle(CalendarItemCycleDeletedEvent @event)
+        {
+            Cycles.RemoveAll(c => c.Id == @event.CycleId);
+        }
+
         void IHandle<CycleExclusionCreatedEvent>.Handle(CycleExclusionCreatedEvent @event)
         {
             var cycle = Cycles.FirstOrDefault(c => c.StartDate.DayOfWeek == @event.StartDate.DayOfWeek);
@@ -126,11 +134,6 @@ namespace AwesomeCalendar.Domain.Aggregates
                 StartDate = @event.StartDate,
                 EndDate = @event.EndDate
             ));
-        }
-
-        void IHandle<CalendarItemCycleDeletedEvent>.Handle(CalendarItemCycleDeletedEvent @event)
-        {
-            throw new NotImplementedException();
         }
     }
 }

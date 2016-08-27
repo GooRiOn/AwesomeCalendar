@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AwesomeCalendar.Contracts.Commands;
-using AwesomeCalendar.Contracts.Events;
 using AwesomeCalendar.Domain.Aggregates;
 using AwesomeCalendar.Infrastructure.Enums;
 using AwesomeCalendar.Infrastructure.Exceptions;
@@ -23,7 +22,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
         {
             ((ICommandHandler<DeleteCalendarItemCycleCommand>) this).Validate(command);
 
-            var calendarItem = await EventStore.GetByIdAsync<CalendarItem, CalendarItemBaseEvent>(command.AggregateId);
+            var calendarItem = await EventStore.GetByIdAsync<CalendarItem>(command.AggregateId);
 
             calendarItem.DeleteCycle(command.Id);
 
@@ -36,9 +35,7 @@ namespace AwesomeCalendar.Domain.CommandHandlers
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.NullCommand, typeof(DeleteCalendarItemCycleCommand));
 
             if(command.Id == Guid.Empty || command.AggregateId == Guid.Empty)
-                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.InvalidCommand, typeof(DeleteCalendarItemCycleCommand));
-
-            
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.InvalidCommand, typeof(DeleteCalendarItemCycleCommand))
         }
     }
 }

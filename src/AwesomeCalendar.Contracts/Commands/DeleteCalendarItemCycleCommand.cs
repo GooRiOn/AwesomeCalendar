@@ -5,7 +5,7 @@ namespace AwesomeCalendar.Contracts.Commands
 {
     public class DeleteCalendarItemCycleCommand : ICommand
     {
-        public Guid Id { get; set; }
+        public Guid CycleId { get; set; }
 
         public Guid AggregateId { get; set; }
     }

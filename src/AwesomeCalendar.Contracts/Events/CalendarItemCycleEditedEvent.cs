@@ -6,6 +6,8 @@ namespace AwesomeCalendar.Contracts.Events
 {
     public class CalendarItemCycleEditedEvent : IEvent
     {
+        public Guid CycleId { get; set; }
+
         public Guid AggregateId { get; set; }
 
         public DateTime StartDate { get; set; }

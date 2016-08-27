@@ -19,6 +19,7 @@ namespace AwesomeCalendar.Domain.EventHandlers
             await CalendarItemCycleRepository.AddAsync(new CalendarItemCycleEntity
             {
                 CalendarItemId = @event.AggregateId,
+                Id = @event.CycleId,
                 Type = @event.Type,
                 Interval = @event.Interval,
                 StartDate = @event.StartDate,
