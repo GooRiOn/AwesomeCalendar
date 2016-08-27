@@ -73,7 +73,7 @@ namespace AwesomeCalendar.Domain.Aggregates
 
         public void DeleteCycle(Guid cycleId)
         {
-            Events.Add(new CalendarItemCycleDeletedEvent {AggregateId = Id, CycleId = cycleId});
+            ApplyChange(new CalendarItemCycleDeletedEvent {AggregateId = Id, CycleId = cycleId});
             Cycles.RemoveAll(c => c.Id == cycleId);
         }
 
