@@ -5,7 +5,7 @@ using AwesomeCalendar.ReadSide.Repositories.Interfaces;
 
 namespace AwesomeCalendar.Domain.EventHandlers
 {
-    class CalendarItemDeletedEventHandler : IEventHandler<CalendarItemDeletedEvent>
+    public class CalendarItemDeletedEventHandler : IEventHandler<CalendarItemDeletedEvent>
     {
         ICalendarItemRepository CalendarItemRepository { get; }
 

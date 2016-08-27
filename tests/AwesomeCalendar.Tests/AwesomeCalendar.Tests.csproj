@@ -79,6 +79,7 @@
     <Compile Include="Aggregates\calendar_item_creation_tests.cs" />
     <Compile Include="CommandHandlers\create_calendar_item_command_handler_tests.cs" />
     <Compile Include="CommandHandlers\delete_calendar_item_command_handler_tests.cs" />
+    <Compile Include="CommandHandlers\delete_calendar_item_cycle_command_handler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
