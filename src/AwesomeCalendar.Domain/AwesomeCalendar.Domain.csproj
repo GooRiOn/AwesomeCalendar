@@ -49,10 +49,12 @@
     <Compile Include="Aggregates\CalendarItemCycle.cs" />
     <Compile Include="Aggregates\CalendarItemCycleExclusion.cs" />
     <Compile Include="CommandHandlers\DeleteCalendarItemCommandHandler.cs" />
+    <Compile Include="CommandHandlers\DeleteCalendarItemCycleCommandHandler.cs" />
     <Compile Include="CommandHandlers\EditCalendarItemCommandHandler.cs" />
     <Compile Include="DependencyInjection\Registration.cs" />
     <Compile Include="EventHandlers\CalendarItemCreatedEventHandler.cs" />
     <Compile Include="EventHandlers\CalendarItemCycleCreatedEventHandler.cs" />
+    <Compile Include="EventHandlers\CalendarItemCycleDeletedEventHandler.cs" />
     <Compile Include="EventHandlers\CalendarItemDeletedEventHandler.cs" />
     <Compile Include="Factories\CommandHandlerExecutor.cs" />
     <Compile Include="Factories\EventHandlerExecutor.cs" />
