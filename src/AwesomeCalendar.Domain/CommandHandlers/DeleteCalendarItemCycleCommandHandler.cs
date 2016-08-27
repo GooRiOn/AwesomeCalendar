@@ -34,8 +34,8 @@ namespace AwesomeCalendar.Domain.CommandHandlers
             if(command == null)
                 throw new AwesomeCalendarException(AwesomeCalendarExceptionType.NullCommand, typeof(DeleteCalendarItemCycleCommand));
 
-            if(command.Id == Guid.Empty || command.AggregateId == Guid.Empty)
-                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.InvalidCommand, typeof(DeleteCalendarItemCycleCommand))
+            if (command.Id == Guid.Empty || command.AggregateId == Guid.Empty)
+                throw new AwesomeCalendarException(AwesomeCalendarExceptionType.InvalidCommand, typeof(DeleteCalendarItemCycleCommand));
         }
     }
 }
