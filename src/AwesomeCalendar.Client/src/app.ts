@@ -6,12 +6,12 @@ export class App
 
     configureRouter(config: RouterConfiguration, router: Router)
     {
+        this.router = router;
         config.title = "Awesome Calendar";
 
         config.map([
-          {route: ['', 'home'], name: 'home', moduleId: 'home', nav: true}
-        ]);
-
-        this.router = router;
+          {route: ['', 'home'], name: 'home', moduleId: 'home', nav: true},
+          { route: 'user', name: 'user', moduleId: 'areas/user/config/userRouting', nav: true, title: 'User' }
+        ]);        
     }  
 }
