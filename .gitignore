@@ -4,6 +4,8 @@ Web.config
 _ReSharper.*
 *.user
 *.suo
+*.js
+*.js.map
 *.ncrunchsolution
 *.ncrunchproject
 _NCrunch*
