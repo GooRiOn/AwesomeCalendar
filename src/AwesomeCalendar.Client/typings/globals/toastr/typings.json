@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/toastr/toastr.d.ts",
+    "raw": "registry:dt/toastr#2.1.3+20160505161446",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/master/toastr/toastr.d.ts"
+  }
+}
