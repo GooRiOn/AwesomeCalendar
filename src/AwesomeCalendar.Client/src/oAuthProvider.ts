@@ -6,13 +6,17 @@ export interface IOAuthProvider
 
 export class OAuthProvider implements IOAuthProvider
 {
+    private readonly storageKey = 'access_token';
+    private storage;
+
     getAccessToken()
     {
-        return null;
+        return this.storage.getElementById(this.storageKey); 
     }
 
     setAccessToken(token: string, isLongTermStored: boolean)
     {
-
+        this.storage = isLongTermStored? localStorage : sessionStorage;
+        this.storage.setItem(this.storageKey, token);
     }
 }

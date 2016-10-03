@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AwesomeCalendar.Infrastructure.Interfaces.Busses;
 using AwesomeCalendar.Infrastructure.Interfaces.Contracts;
 using EasyNetQ;
@@ -17,7 +16,7 @@ namespace AwesomeCalendar.Messaging.Busses
             EventBusExecutor = eventBusExecutor;
 
             Bus = RabbitHutch.CreateBus("host=localhost");
-            Bus.Receive(nameof(EventBus), (Action<IEvent>) EventBusExecutor.ExecuteAsync);
+            Bus.Receive(nameof(EventBus), (IEvent @event) =>  EventBusExecutor.ExecuteAsync(@event));
         }
 
         public async Task SendAsync<TEvent>(TEvent @event) where TEvent : class, IEvent =>

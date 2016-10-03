@@ -14,7 +14,7 @@ namespace AwesomeCalendar.Messaging.Executors
             EventHandlerExecutor = eventHandlerExecutor;
         }
 
-        public async void ExecuteAsync(IEvent @event)
+        public async Task ExecuteAsync(IEvent @event)
         {
             var eventType = @event.GetType();
             var executorType = EventHandlerExecutor.GetType();

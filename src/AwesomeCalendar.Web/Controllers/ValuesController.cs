@@ -25,7 +25,7 @@ namespace AwesomeCalendar.Web.Controllers
         [HttpPost, Route("Send")]
         public async Task Send()
         {
-            var result = await CommandBus.SendAsync(new EditCalendarItemCommand(new Guid("3B4754E7-2D63-4728-A16A-F715366DA011"))
+            var result = await CommandBus.SendAsync(new CreateCalendarItemCommand()
             {
                 Description = "UDAŁO SIE",
                 Name = "Test",

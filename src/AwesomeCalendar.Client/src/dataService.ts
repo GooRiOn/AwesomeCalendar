@@ -1,15 +1,7 @@
 import {HttpClient, json} from 'aurelia-fetch-client';
 import { IOAuthProvider } from '../src/oAuthProvider';
 
-export interface IDataService
-{
-    get<TResponse>(url: string, isAuthorized: boolean) : Promise<TResponse>;
-    post<TData, TResponse>(url: string, data: TData, isAuthorized: boolean) : Promise<TResponse>;
-    put<TData, TResponse>(url: string, data: TData, isAuthorized: boolean) : Promise<TResponse>;
-    delete<TData, TResponse>(url: string, data: TData, isAuthorized: boolean) : Promise<TResponse>;
-}
-
-export abstract class DataService implements IDataService
+export abstract class DataService
 {    
     constructor(private httpClient: HttpClient, private oAuthProvider: IOAuthProvider)
     {        
@@ -18,22 +10,22 @@ export abstract class DataService implements IDataService
         })
     }
 
-    get(url: string, isAuthorized: boolean) 
+    protected get(url: string, isAuthorized: boolean) 
     {
         return this.createHttpRequest('get', url, null, isAuthorized);
     }
 
-    post<TData, TResponse>(url: string, data: TData, isAuthorized: boolean)
+    protected post<TData, TResponse>(url: string, data: TData, isAuthorized: boolean)
     {
         return this.createHttpRequest('post', url, data, isAuthorized);
     }
 
-    put<TData, TResponse>(url: string, data: TData, isAuthorized: boolean)
+    protected put<TData, TResponse>(url: string, data: TData, isAuthorized: boolean)
     {
         return this.createHttpRequest('put', url, data, isAuthorized);
     }
 
-    delete<TData, TResponse>(url: string, data: TData, isAuthorized: boolean)
+    protected delete<TData, TResponse>(url: string, data: TData, isAuthorized: boolean)
     {
         return this.createHttpRequest('delete', url, data, isAuthorized);
     }

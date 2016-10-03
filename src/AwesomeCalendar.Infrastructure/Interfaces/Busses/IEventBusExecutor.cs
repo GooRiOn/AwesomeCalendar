@@ -5,6 +5,6 @@ namespace AwesomeCalendar.Infrastructure.Interfaces.Busses
 {
     public interface IEventBusExecutor
     {
-        void ExecuteAsync(IEvent @event);
+        Task ExecuteAsync(IEvent @event);
     }
 }
