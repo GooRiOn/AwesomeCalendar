@@ -6,8 +6,9 @@ export abstract class DataService
     constructor(private httpClient: HttpClient, private oAuthProvider: IOAuthProvider)
     {        
         this.httpClient.configure(config => {
-            config.withBaseUrl('http://localhost:4000');            
-        })
+            config.withBaseUrl('http://localhost:19388/api/');   
+            config.withDefaults({ mode: 'cors' }); 
+        });
     }
 
     protected get(url: string, isAuthorized: boolean) 
@@ -35,7 +36,7 @@ export abstract class DataService
         let requestConfig : any = 
         {
             method: method,
-            body: data
+            body: json(data)
         };
         
         if(isAuthorized)
