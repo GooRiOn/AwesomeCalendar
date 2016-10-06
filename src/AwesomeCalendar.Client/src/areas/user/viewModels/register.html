@@ -1,3 +1,43 @@
 <template> 
-AAA
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>User register</h1>
+            </div>
+        </div>
+        <br>
+        <label>User name</label>
+        <div class="row">
+            <div class="col-xs-6">
+                <input class="form-control" type="text" value.bind="userRegisterModel.userName" placeholder="User name"/>
+            </div>
+        </div>
+        <br>
+        <label>Email</label>
+        <div class="row">
+            <div class="col-xs-6">
+                <input class="form-control" type="text" value.bind="userRegisterModel.email" placeholder="Email"/>
+            </div>
+        </div>
+        <br>
+        <label>Password</label>
+        <div class="row">
+            <div class="col-xs-6">
+                <input class="form-control" type="password" value.bind="userRegisterModel.password" placeholder="Password"/>
+            </div>
+        </div>
+        <br>
+        <label>Confirm password</label>
+        <div class="row">
+            <div class="col-xs-6">
+                <input class="form-control" type="password" value.bind="userRegisterModel.confirmPassword" placeholder="Confirm password"/>
+            </div>
+        </div>
+        <br> 
+        <div class="row">
+            <div class="col-xs-6">
+                 <button type="button" class="btn btn-primary" click.trigger="register()">Register</button>
+            </div>
+        </div>
+    </div>
 </template>

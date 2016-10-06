@@ -18,6 +18,6 @@ export class UserRegisterService extends DataService implements IUserRegisterSer
 
     register(model: UserRegisterModel)
     {
-        return super.post('user/register', model, false);
+        return super.post('Account/Register', model, false);
     }
 }
